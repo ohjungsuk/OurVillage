@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cnb_unselectedColor="#666666">
+
+    <item android:id="@+id/menu_main"
+        android:icon="@drawable/ic_main"
+        android:title="메인 피드"
+        app:cnb_iconColor="@color/navigation_color_main"/>
+    <item android:id="@+id/menu_apartment"
+        android:icon="@drawable/ic_apartment"
+        android:title="내 아파트"
+        app:cnb_iconColor="@color/navigation_color_apartment"/>
+    <item android:id="@+id/menu_post"
+        android:icon="@drawable/ic_post"
+        android:title="울동네 게시판"
+        app:cnb_iconColor="@color/navigation_color_post"/>
+    <item android:id="@+id/menu_tasty"
+        android:icon="@drawable/ic_tasty"
+        android:title="맛집"
+        app:cnb_iconColor="@color/navigation_color_tasty"/>
+    <item android:id="@+id/menu_mypage"
+        android:icon="@drawable/ic_mypage"
+        android:title="내 정보"
+        app:cnb_iconColor="@color/navigation_color_mypage"/>
+
+</menu>
