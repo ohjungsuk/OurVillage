@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    FragmentManager fragmentManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(view -> {
 
         });
-//        getSupportActionBar().setLogo(R.drawable.icon_appbar_bandlogo);
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         tabLayout = (TabLayout) findViewById(R.id.main_tabs);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_main));
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
 
-        coordinatorLayout = findViewById(R.id.main_root);
+        coordinatorLayout = findViewById(R.id.root);
 
         // TabPagerAdapter 생성
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 // 뷰페이저에 탭의 포지션에 해당하는 레이아웃 설정
                 viewPager.setCurrentItem(tab.getPosition());
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < 5; i++) {
                     if (tab.getPosition() == i) {
                         // 탭이 선택되었을 경우, 아이콘 색상은 검은색
                         tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);

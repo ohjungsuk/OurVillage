@@ -1,4 +1,4 @@
-package com.ajou.ourvillage;
+package com.ajou.ourvillage.Tasty;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ajou.ourvillage.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MypageFragment#newInstance} factory method to
+ * Use the {@link TastyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MypageFragment extends Fragment {
+public class TastyFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class MypageFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MypageFragment() {
+    public TastyFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class MypageFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MypageFragment.
+     * @return A new instance of fragment TastyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MypageFragment newInstance(String param1, String param2) {
-        MypageFragment fragment = new MypageFragment();
+    public static TastyFragment newInstance(String param1, String param2) {
+        TastyFragment fragment = new TastyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class MypageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mypage, container, false);
+        return inflater.inflate(R.layout.fragment_tasty, container, false);
     }
 }

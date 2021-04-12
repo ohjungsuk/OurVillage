@@ -5,6 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.ajou.ourvillage.Apart.ApartFragment;
+import com.ajou.ourvillage.Main.MainFragment;
+import com.ajou.ourvillage.MyPage.MypageFragment;
+import com.ajou.ourvillage.Post.PostFragment;
+import com.ajou.ourvillage.Tasty.TastyFragment;
+
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
     private int tabCount;

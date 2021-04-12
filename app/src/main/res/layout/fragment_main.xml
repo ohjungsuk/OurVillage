@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    android:layout_width="match_parent"
+    android:background="#F1F2F4"
+    android:id="@+id/main_root"
+    tools:context=".Main.MainFragment"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Main" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/main_temp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:clickable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+            android:text="메인 화면입니다." />
+
+        <ImageView
+            android:id="@+id/main_temp2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:clickable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="fitXY"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
