@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#F1F2F4"
+    android:id="@+id/mypage_root"
+    tools:context=".MyPage.MypageFragment">
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/mypage_temp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:clickable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+            android:text="마이페이지 화면입니다." />
+
+        <ImageView
+            android:id="@+id/mypage_temp2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:clickable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="fitXY"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
