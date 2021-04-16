@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/theme</item>
+    </style>
+
+    <style name="backArrow" parent="AppTheme2">
+        <item name="android:actionMenuTextColor">#FFFFFF</item>
+    </style>
 </resources>
