@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1024577752338",
+    "project_id": "ourvillage-d0fd0",
+    "storage_bucket": "ourvillage-d0fd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024577752338:android:f0b28c6923b8129364b7cb",
+        "android_client_info": {
+          "package_name": "com.ajou.ourvillage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024577752338-mah432kjld03i36leos94mf3jsmghmo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDG4vbatGDynBGmhSbT88Z85DGilcorNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024577752338-mah432kjld03i36leos94mf3jsmghmo2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
