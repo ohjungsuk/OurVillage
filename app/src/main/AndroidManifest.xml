@@ -15,8 +15,17 @@
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Apart.ApartCommunityActivity"
+            android:theme="@style/Theme.Design.NoActionBar"/>
+        <activity
+            android:name=".Apart.ApartHelpActivity"
+            android:theme="@style/Theme.Design.NoActionBar"/>
+        <activity
+            android:name=".Apart.ApartNoticeActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
             android:name=".Login.SignUpActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -33,7 +42,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
+            android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 
 </manifest>
