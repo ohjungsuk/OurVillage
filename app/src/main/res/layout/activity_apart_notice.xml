@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".Apart.ApartNoticeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_apart_notice"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/ourvillage_main"
+        app:titleTextColor="@android:color/white"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="20dp"
+            android:layout_gravity="center"
+            tools:ignore="RtlSymmetry">
+
+            <Button
+                android:id="@+id/apart_notice_btn_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_close" />
+
+            <TextView
+                android:id="@+id/apart_notice_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_toEndOf="@+id/apart_notice_btn_close"
+                android:textColor="@android:color/white"
+                android:text="공지사항"
+                android:textSize="18sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_below="@+id/toolbar_apart_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:padding="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="bottom|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:text="아파트 공지사항." />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F1F2F4"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
