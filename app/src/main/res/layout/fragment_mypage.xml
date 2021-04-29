@@ -10,35 +10,331 @@
     tools:context=".MyPage.MypageFragment">
 
     <LinearLayout
-        android:background="#FFFFFF"
-        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/mypage_imgbtn_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:maxWidth="120dp"
+            android:maxHeight="120dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/feed_profile2"/>
 
-        <ImageView
-            android:id="@+id/mypage_temp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:clickable="true"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="fitXY"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="닉네임 : "
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/mypage_Nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" - - -"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="이메일 : "
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/mypage_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" - - - "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+            </LinearLayout>
 
-        <TextView
+        </LinearLayout>
+        <View
+            android:id="@+id/profile_line1"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:textSize="30sp"
-            android:textColor="@android:color/black"
-            android:text="마이페이지 화면입니다." />
+            android:layout_height="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="?attr/dividerVertical"
+            android:backgroundTint="@color/theme" />
 
-        <ImageView
-            android:id="@+id/mypage_temp2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:clickable="true"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="fitXY"/>
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/mypage_add_post"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/rounding_btn"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="게시물 추가"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="10dp"/>
+            <Button
+                android:id="@+id/mypage_modify_pw"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:background="@drawable/rounding_btn"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="회원정보 수정 "
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="10dp"/>
+            <Button
+                android:id="@+id/mypage_myAddress"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/rounding_btn"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="내 지역 설정"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="10dp"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/mypage_linear_modify"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="?attr/dividerVertical"
+                android:backgroundTint="@color/theme" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="닉네임 설정"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center_vertical"
+                    android:text="닉네임 : "
+                    android:textColor="@color/theme"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/mypage_edt_name"
+                    android:layout_marginEnd="20dp"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:scrollHorizontally="false"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:hint="닉네임을 설정해주세요"
+                    android:backgroundTint="@color/theme"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/mypage_NameModify"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:text="수정"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:background="@drawable/rounding_btn"
+                    android:textColor="@color/black"/>
+                <Button
+                    android:id="@+id/mypage_cancel1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:text="닫기"
+                    android:textSize="12sp"
+                    android:gravity="center"
+
+                    android:background="@drawable/rounding_btn"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="?attr/dividerVertical"
+                android:backgroundTint="@color/theme" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 재설정"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:textSize="18sp"/>
+
+
+            <LinearLayout
+                android:paddingStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center_vertical"
+                    android:text="이메일 : "
+                    android:textColor="@color/theme"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/mypage_edt_PwChange_byEmail"
+                    android:layout_marginEnd="20dp"
+                    android:maxLength="30"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:scrollHorizontally="false"
+                    android:textSize="12sp"
+                    android:hint="비밀번호 변경을 위해 이메일을 입력해주세요"
+                    android:backgroundTint="@color/theme"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/mypage_EmailAuth"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:text="인증"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:background="@drawable/rounding_btn"
+                    android:textColor="@color/black"/>
+                <Button
+                    android:gravity="center"
+                    android:id="@+id/mypage_cancel2"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:text="닫기"
+                    android:textSize="12sp"
+                    android:background="@drawable/rounding_btn"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/profile_line3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="?attr/dividerVertical"
+            android:backgroundTint="@color/theme" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:layout_marginEnd="10dp">
+            <Button
+                android:id="@+id/mypage_btn_MyGoodPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내가 좋아요 한 글"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/white"
+                android:textSize="12sp"
+                android:textColor="@color/black"/>
+            <Button
+                android:id="@+id/mypage_MyCommentPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내가 댓글 단 글"
+                android:layout_marginBottom="10dp"
+                android:textSize="12sp"
+                android:background="@android:color/white"
+                android:textColor="@color/black"/>
+            <Button
+                android:id="@+id/mypage_MyPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내가 쓴 글"
+                android:textSize="12sp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/white"
+                android:textColor="@color/black"/>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>
