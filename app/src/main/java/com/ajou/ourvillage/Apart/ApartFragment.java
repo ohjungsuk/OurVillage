@@ -60,4 +60,5 @@ public class ApartFragment extends Fragment {
 
         return view;
     }
+
 }

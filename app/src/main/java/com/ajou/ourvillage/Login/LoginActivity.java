@@ -2,6 +2,7 @@ package com.ajou.ourvillage.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.media.MediaSession2;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.MainActivity;
+import com.ajou.ourvillage.MyPage.MypageFragment;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -144,8 +146,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void loginUser(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+    public void loginUser(String e_mail, String password) {
+        firebaseAuth.signInWithEmailAndPassword(e_mail, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -153,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                             // 로그인 성공
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             firebaseAuth.addAuthStateListener(firebaseAuthListener);
+                            // 마이페이지로 내 이메일 전달
                         } else {
                             // 로그인 실패
                             Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();

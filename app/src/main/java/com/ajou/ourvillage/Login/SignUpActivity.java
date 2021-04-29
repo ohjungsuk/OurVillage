@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!signUP_edt_email.getText().toString().equals("") && !signUP_edt_pw.getText().toString().equals("")) {
                     // 이메일과 비밀번호가 공백이 아닌 경우
-                    createUser(signUP_edt_email.getText().toString(), signUP_edt_pw.getText().toString(), signUP_edt_name.getText().toString());
+                    createUser(signUP_edt_email.getText().toString(), signUP_edt_pw.getText().toString());
                 } else {
                     // 이메일과 비밀번호가 공백인 경우
                     Toast.makeText(SignUpActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
@@ -54,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void createUser(String email, String password, String name){
+    private void createUser(String email, String password){
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -75,8 +75,8 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(SignUpActivity.this)
-                .setMessage("If you go back, the content is not saved")
-                .setPositiveButton("continue", new DialogInterface.OnClickListener() {
+                .setMessage("뒤로 가시면 내용이 저장되지 않습니다.")
+                .setPositiveButton("뒤로가기", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
                         finish();
                     }
                 })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void setUp(){
         //signup_toolbar = (Toolbar)findViewById(R.id.signup_toolbar);
-        signUP_edt_name = (EditText)findViewById(R.id.signUP_edt_name);
+        //signUP_edt_name = (EditText)findViewById(R.id.signUP_edt_name);
         signUP_edt_email = (EditText)findViewById(R.id.signUP_edt_email);
         signUP_edt_pw = (EditText)findViewById(R.id.signUP_edt_pw);
         sinUp_edt_pwCheck = (EditText)findViewById(R.id.sinUp_edt_pwCheck);
