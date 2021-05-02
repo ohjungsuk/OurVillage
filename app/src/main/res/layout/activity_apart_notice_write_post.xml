@@ -66,13 +66,33 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <EditText
-                android:padding="10dp"
-                android:focusable="true"
+                android:padding="15dp"
+                android:id="@+id/apart_notice_write_post_tv_title"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:hint="제목"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:lines="1" />
+
+            <View
+                android:layout_marginHorizontal="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F1F2F4"/>
+
+            <EditText
+                android:padding="15dp"
                 android:id="@+id/apart_notice_write_post_tv_content"
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
