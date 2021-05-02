@@ -57,9 +57,44 @@ public class ApartHelpWritePostActivity extends AppCompatActivity {
             public void onClick(View view) {
                 title = et_title.getText().toString();
                 content = et_content.getText().toString();
-                System.out.println("입력 제목 : " + title);
-                System.out.println("입력 내용 : " + content);
-                finish();
+
+                if (title.equals("")) {
+                    new AlertDialog.Builder(ApartHelpWritePostActivity.this)
+                            .setMessage("제목을 입력해주세요")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                } else if (content.equals("")) {
+                    new AlertDialog.Builder(ApartHelpWritePostActivity.this)
+                            .setMessage("내용을 입력해주세요")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                } else if (et_title != null && et_content != null) {
+                    new AlertDialog.Builder(ApartHelpWritePostActivity.this)
+                            .setMessage("글을 등록하시겠습니까?")
+                            .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    System.out.println("입력 제목 : " + title);
+                                    System.out.println("입력 내용 : " + content);
+                                    dialogInterface.dismiss();
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                }
             }
         });
     }
