@@ -5,12 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#F1F2F4"
+    android:background="@android:color/white"
     android:id="@+id/apart_root"
     tools:context=".Apart.ApartFragment">
 
     <LinearLayout
-        android:background="#FFFFFF"
         android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,14 +75,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:textColor="@android:color/black"
-                    android:text="⦁ "/>
+                    android:text="@string/dot"/>
 
                 <TextView
                     android:id="@+id/apart_notice1"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     android:text="제목" />
 
             </LinearLayout>
@@ -98,13 +98,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_notice2"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -119,13 +122,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_notice3"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -140,13 +146,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_notice4"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -161,13 +170,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_notice5"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -222,13 +234,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_help1"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     android:text="제목" />
 
             </LinearLayout>
@@ -243,13 +258,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_help2"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -264,13 +282,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_help3"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -285,13 +306,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_help4"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -306,13 +330,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_help5"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -367,13 +394,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_community1"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     android:text="제목" />
 
             </LinearLayout>
@@ -388,13 +418,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_community2"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -409,13 +442,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_community3"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -430,13 +466,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_community4"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>
@@ -451,13 +490,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="⦁ "/>
+                    android:textColor="@android:color/black"
+                    android:text="@string/dot" />
 
                 <TextView
                     android:id="@+id/apart_community5"
+                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     tools:text="제목" />
 
             </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F1F2F4"
     android:orientation="vertical"
     tools:context=".Apart.ApartHelpActivity">
 
@@ -16,7 +16,6 @@
         app:titleTextColor="@android:color/white"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,17 +48,71 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_below="@+id/toolbar_apart_help"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <ImageView
-            android:scaleType="centerCrop"
-            android:padding="3dp"
+        <RelativeLayout
+            android:layout_marginHorizontal="15dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/apart_help_tv_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="16sp"
+                android:text="글 검색" />
+
+            <EditText
+                android:id="@+id/apart_help_search_et"
+                android:layout_toEndOf="@+id/apart_help_tv_label1"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/ourvillage_main" />
+
+            <TextView
+                android:id="@+id/apart_help_btn_search"
+                android:layout_toStartOf="@+id/apart_help_btn_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:text="검색"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/apart_help_btn_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#00FFFFFF"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="글쓰기" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/apart_help_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            tools:listitem="@layout/item_post" />
 
         <LinearLayout
             android:orientation="vertical"
