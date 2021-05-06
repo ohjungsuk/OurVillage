@@ -140,7 +140,7 @@
     <Button
         android:id="@+id/signUP_btn_done"
         android:textSize="18sp"
-        android:text="DONE !"
+        android:text="회원가입 !"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/theme"
         android:layout_marginEnd="10dp"

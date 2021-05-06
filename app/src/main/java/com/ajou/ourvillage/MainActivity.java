@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.kakao.network.ApiErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = null;
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     CoordinatorLayout coordinatorLayout;
     private TabLayout tabLayout;
@@ -63,14 +65,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
         //유저가 로그인 하지 않은 상태라면 null 상태이고 이 액티비티를 종료하고 로그인 액티비티를 연다.
-        if(firebaseAuth.getCurrentUser() == null) {
+        if(firebaseUser == null) {
+            Toast.makeText(getApplicationContext(),
+                    "테스트2", Toast.LENGTH_SHORT).show();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+        }else {
+            //회원가입 or login
+            for (UserInfo profile : firebaseUser.getProviderData()){
+                String name = profile.getDisplayName();
+//                Toast.makeText(getApplicationContext(),
+//                        "테스트1", Toast.LENGTH_SHORT).show();
+                if(name != null){
+                    if(name.length() == 0){
+                        Toast.makeText(getApplicationContext(),
+                                "테스트", Toast.LENGTH_SHORT).show();
+                        //finish();
+                        startActivity(new Intent(this, SignUp_profile.class));
+                        finish();
+                    }
+                }
+            }
+
         }
 
         //유저가 있다면, null이 아니면 계속 진행
-        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         main_btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         dialogInterface.dismiss();
+                                        firebaseAuth.signOut();
                                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                                         startActivity(intent);
                                         finish();
