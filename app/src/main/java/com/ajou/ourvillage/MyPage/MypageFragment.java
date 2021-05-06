@@ -27,28 +27,34 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class MypageFragment extends Fragment {
 
     TextView mypage_email, mypage_Nickname;
-    Button mypage_add_post, mypage_modify_pw, mypage_cancel1, mypage_cancel2,
+    Button mypage_add_post, mypage_modify_pw, mypage_cancel1, mypage_cancel2,mypage_NameModify,
             mypage_btn_MyGoodPost, mypage_MyCommentPost, mypage_MyPost, mypage_EmailAuth;
     ImageButton mypage_imgbtn_profile;
     LinearLayout mypage_linear_modify;
     EditText mypage_edt_name, mypage_edt_PwChange_byEmail;
 
     private void init(View v){
+        mypage_Nickname = (TextView)v.findViewById(R.id.mypage_Nickname);
         mypage_email = (TextView)v.findViewById(R.id.mypage_email);
+        mypage_NameModify =(Button)v.findViewById(R.id.mypage_NameModify);
         mypage_EmailAuth = (Button)v.findViewById(R.id.mypage_EmailAuth);
         mypage_linear_modify = (LinearLayout) v.findViewById(R.id.mypage_linear_modify);
         mypage_modify_pw = (Button) v.findViewById(R.id.mypage_modify_pw);
         mypage_cancel1 = (Button) v.findViewById(R.id.mypage_cancel1);
         mypage_cancel2 = (Button) v.findViewById(R.id.mypage_cancel2);
+        mypage_edt_name = (EditText) v.findViewById(R.id.mypage_edt_name);
         mypage_edt_PwChange_byEmail= (EditText) v.findViewById(R.id.mypage_edt_PwChange_byEmail);
     }
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
     String emailEdit;
 
     public MypageFragment() {
@@ -68,6 +74,40 @@ public class MypageFragment extends Fragment {
         init(view);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            for(UserInfo profile : user.getProviderData()){
+                String email = profile.getEmail();
+                String name = profile.getDisplayName();
+                mypage_Nickname.setText(name);
+                mypage_email.setText(email);
+            }
+        }
+
+        mypage_NameModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nickname = mypage_edt_name.getText().toString();
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(nickname)
+                        .build();
+                user.updateProfile(profileUpdates)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    if(user!=null){
+                                        for(UserInfo profile : user.getProviderData()){
+                                            String name = profile.getDisplayName();
+                                            mypage_Nickname.setText(name);
+                                            Toast.makeText(getContext(), "수정완료", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
 
         mypage_EmailAuth.setOnClickListener(new View.OnClickListener() {
             @Override

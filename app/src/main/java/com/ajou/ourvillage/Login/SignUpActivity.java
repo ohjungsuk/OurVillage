@@ -15,10 +15,13 @@ import android.widget.Toolbar;
 
 import com.ajou.ourvillage.MainActivity;
 import com.ajou.ourvillage.R;
+import com.ajou.ourvillage.SignUp_profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -26,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText signUP_edt_name,signUP_edt_email,signUP_edt_pw,sinUp_edt_pwCheck;
     Button signUP_btn_done;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
         //파이어베이스 접근 설정
         // user = firebaseAuth.getCurrentUser();
         firebaseAuth =  FirebaseAuth.getInstance();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         // firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
         signUP_btn_done.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +64,9 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //Toast.makeText(SignUpActivity.this, "???", Toast.LENGTH_SHORT).show();
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                             Toast.makeText(SignUpActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
