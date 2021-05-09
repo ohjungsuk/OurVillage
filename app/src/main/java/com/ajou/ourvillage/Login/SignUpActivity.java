@@ -40,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         setUp();
 
         //파이어베이스 접근 설정
-        // user = firebaseAuth.getCurrentUser();
+
         firebaseAuth =  FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         // firebaseDatabase = FirebaseDatabase.getInstance().getReference();
@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //Toast.makeText(SignUpActivity.this, "???", Toast.LENGTH_SHORT).show();
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                            Intent intent = new Intent(SignUpActivity.this, SignUp_profile.class);
                             startActivity(intent);
                             finish();
                             Toast.makeText(SignUpActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
@@ -106,5 +106,10 @@ public class SignUpActivity extends AppCompatActivity {
         signUP_edt_pw = (EditText)findViewById(R.id.signUP_edt_pw);
         sinUp_edt_pwCheck = (EditText)findViewById(R.id.sinUp_edt_pwCheck);
         signUP_btn_done = (Button)findViewById(R.id.signUP_btn_done);
+    }
+    private void FlagStartActivity(Class c){
+        Intent intent = new Intent(this,c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

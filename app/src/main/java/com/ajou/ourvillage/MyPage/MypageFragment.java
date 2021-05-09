@@ -88,24 +88,28 @@ public class MypageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String nickname = mypage_edt_name.getText().toString();
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(nickname)
-                        .build();
-                user.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    if(user!=null){
-                                        for(UserInfo profile : user.getProviderData()){
-                                            String name = profile.getDisplayName();
-                                            mypage_Nickname.setText(name);
-                                            Toast.makeText(getContext(), "수정완료", Toast.LENGTH_SHORT).show();
+                if(nickname.length() > 0){
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(nickname)
+                            .build();
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        if(user!=null){
+                                            for(UserInfo profile : user.getProviderData()){
+                                                String name = profile.getDisplayName();
+                                                mypage_Nickname.setText(name);
+                                                Toast.makeText(getContext(), "수정완료", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        });
+                            });
+                }else {
+                    Toast.makeText(getContext(), "닉네임을 입력해야 수정가능해요!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
