@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".SignUp_profile">
+    tools:context=".Login.SignUp_profile">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/signup_profile_toolbar"

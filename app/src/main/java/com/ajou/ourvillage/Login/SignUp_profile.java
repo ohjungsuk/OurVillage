@@ -1,4 +1,4 @@
-package com.ajou.ourvillage;
+package com.ajou.ourvillage.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.ajou.ourvillage.Login.LoginActivity;
 import com.ajou.ourvillage.Login.SignUpActivity;
+import com.ajou.ourvillage.MainActivity;
+import com.ajou.ourvillage.MemberInfo;
+import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,7 +37,7 @@ public class SignUp_profile extends AppCompatActivity {
             signUP_edt_Address,signUP_edt_Apart;
     Button signUP_profile_btn_done;
 
-    boolean isProfileAllRegister = false;
+    private boolean activity_check = true;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore db;
 
@@ -42,7 +45,7 @@ public class SignUp_profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_profile);
-
+        Log.d("stack","SignUp_profile");
         setUp();
         signUP_profile_btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,10 +83,14 @@ public class SignUp_profile extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(getApplicationContext(),
-                                                                "회원정보 등록 성공", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(SignUp_profile.this,LoginActivity.class));
-                                                        finish();
+                                                        if(activity_check){
+                                                            Toast.makeText(getApplicationContext(),
+                                                                    "회원정보 등록 성공", Toast.LENGTH_SHORT).show();
+                                                            startActivity(new Intent(SignUp_profile.this, MainActivity.class));
+                                                            finish();
+                                                            activity_check =false;
+                                                        }
+
                                                     }
                                                 }
                                             });
