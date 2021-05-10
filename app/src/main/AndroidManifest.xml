@@ -15,9 +15,6 @@
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignUp_profile"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
             android:name=".Apart.ApartNoticeWritePostActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
@@ -38,6 +35,12 @@
         <activity
             android:name=".Login.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Login.SignUp_profile"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Main.AddMyFeed"
+            android:theme="@style/Theme.Design.NoActionBar" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

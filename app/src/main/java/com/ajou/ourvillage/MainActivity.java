@@ -53,12 +53,13 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Toolbar toolbar;
     private Button main_btn_logout,main_btn_signout;
+    private boolean activity_stack_check = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("stack","MainActivity");
         setUp();
         //HashKey();
         //out();
@@ -74,28 +75,14 @@ public class MainActivity extends AppCompatActivity {
         //유저가 로그인 하지 않은 상태라면 null 상태이고 이 액티비티를 종료하고 로그인 액티비티를 연다.
         if(firebaseUser == null) {
             Toast.makeText(getApplicationContext(),"nonUser",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
+            mStartActivity(LoginActivity.class);
             finish();
 
-        }else { //login
-            for (UserInfo profile : firebaseUser.getProviderData()){
-                String nickname = profile.getDisplayName();
-                if(nickname != null){
-                    if(nickname.length() == 0){
-                        Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),"finishMain",Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(this,SignUp_profile.class);
-//                        startActivity(intent);
-                        mStartActivity(SignUp_profile.class);
-                    }
-                }else{
-                    Toast.makeText(getApplicationContext(),"nickname?",Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
+        }else { //login //유저가 있다면, null이 아니면 계속 진행
 
-        //유저가 있다면, null이 아니면 계속 진행
+        }
 
         main_btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,16 +121,19 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         for (UserInfo profile : firebaseUser.getProviderData()) {
-                                            db = FirebaseFirestore.getInstance();
-                                            String db_email = profile.getEmail();
-                                            db.collection(db_email).document(firebaseUser.getUid()).delete();
-                                            firebaseAuth.signOut();
-                                            firebaseUser.delete();
-                                            Toast.makeText(getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                            dialogInterface.dismiss();
+                                            if(activity_stack_check){
+                                                db = FirebaseFirestore.getInstance();
+                                                String db_email = profile.getEmail();
+                                                db.collection(db_email).document(firebaseUser.getUid()).delete();
+                                                firebaseAuth.signOut();
+                                                firebaseUser.delete();
+                                                Toast.makeText(getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                                startActivity(intent);
+                                                activity_stack_check =false;
+                                                finish();
+                                                dialogInterface.dismiss();
+                                            }
                                         }
                                     }
                                 });

@@ -33,12 +33,12 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class MypageFragment extends Fragment {
 
-    TextView mypage_email, mypage_Nickname;
-    Button mypage_add_post, mypage_modify_pw, mypage_cancel1, mypage_cancel2,mypage_NameModify,
+    private TextView mypage_email, mypage_Nickname;
+    private Button mypage_add_post, mypage_modify_pw, mypage_cancel1, mypage_cancel2,mypage_NameModify,
             mypage_btn_MyGoodPost, mypage_MyCommentPost, mypage_MyPost, mypage_EmailAuth;
-    ImageButton mypage_imgbtn_profile;
-    LinearLayout mypage_linear_modify;
-    EditText mypage_edt_name, mypage_edt_PwChange_byEmail;
+    private ImageButton mypage_imgbtn_profile;
+    private LinearLayout mypage_linear_modify;
+    private EditText mypage_edt_name, mypage_edt_PwChange_byEmail;
 
     private void init(View v){
         mypage_Nickname = (TextView)v.findViewById(R.id.mypage_Nickname);

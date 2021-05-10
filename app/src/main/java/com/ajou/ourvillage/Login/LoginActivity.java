@@ -2,18 +2,16 @@ package com.ajou.ourvillage.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
-import android.media.MediaSession2;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.MainActivity;
-import com.ajou.ourvillage.MyPage.MypageFragment;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setUp();
+        Log.d("stack","LoginActivity");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -74,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
                     startActivity(intent);
                     finish();
                 } else {
@@ -133,10 +133,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(MeV2Response result) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Log.d("stack","LoginKaKao?kr");
+
                     intent.putExtra("name", result.getNickname());
                     intent.putExtra("profile", result.getProfileImagePath());
                     startActivity(intent);
                     finish();
+
                 }
             });
         }
