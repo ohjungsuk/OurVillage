@@ -30,6 +30,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.kakao.network.ApiErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -39,10 +42,11 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = null;
+    private static final String TAG = "MainActivity";
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private FirebaseFirestore db;
 
     CoordinatorLayout coordinatorLayout;
     private TabLayout tabLayout;
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         setUp();
         //HashKey();
-        out();
+        //out();
 
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(view -> {
@@ -69,27 +73,26 @@ public class MainActivity extends AppCompatActivity {
 
         //유저가 로그인 하지 않은 상태라면 null 상태이고 이 액티비티를 종료하고 로그인 액티비티를 연다.
         if(firebaseUser == null) {
-            Toast.makeText(getApplicationContext(),
-                    "테스트2", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"nonUser",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
             finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }else {
-            //회원가입 or login
+
+        }else { //login
             for (UserInfo profile : firebaseUser.getProviderData()){
-                String name = profile.getDisplayName();
-//                Toast.makeText(getApplicationContext(),
-//                        "테스트1", Toast.LENGTH_SHORT).show();
-                if(name != null){
-                    if(name.length() == 0){
-                        Toast.makeText(getApplicationContext(),
-                                "테스트", Toast.LENGTH_SHORT).show();
-                        //finish();
-                        startActivity(new Intent(this, SignUp_profile.class));
-                        finish();
+                String nickname = profile.getDisplayName();
+                if(nickname != null){
+                    if(nickname.length() == 0){
+                        Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"finishMain",Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(this,SignUp_profile.class);
+//                        startActivity(intent);
+                        mStartActivity(SignUp_profile.class);
                     }
+                }else{
+                    Toast.makeText(getApplicationContext(),"nickname?",Toast.LENGTH_SHORT).show();
                 }
             }
-
         }
 
         //유저가 있다면, null이 아니면 계속 진행
@@ -126,15 +129,22 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        dialogInterface.dismiss();
-                                        firebaseAuth.signOut();
-                                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                        for (UserInfo profile : firebaseUser.getProviderData()) {
+                                            db = FirebaseFirestore.getInstance();
+                                            String db_email = profile.getEmail();
+                                            db.collection(db_email).document(firebaseUser.getUid()).delete();
+                                            firebaseAuth.signOut();
+                                            firebaseUser.delete();
+                                            Toast.makeText(getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                            dialogInterface.dismiss();
+                                        }
                                     }
                                 });
 
@@ -203,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         main_btn_signout = (Button)findViewById(R.id.main_btn_signout);
     }
 
-    public void out(){
+    public void out(){  //카카오용
         main_btn_logout.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -289,5 +299,11 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (Exception e) {
         }
+    }
+
+    private void mStartActivity(Class c){
+        Intent intent = new Intent(this,c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

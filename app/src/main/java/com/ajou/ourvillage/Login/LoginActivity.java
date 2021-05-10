@@ -50,7 +50,9 @@ public class LoginActivity extends AppCompatActivity {
             //이미 로그인 되었다면 이 액티비티를 종료함
             finish();
             //그리고 메인화면으로 넘어감
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+
         }
 
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
                 }
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
-//                finish();
+
             }
         });
 
@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -183,5 +184,10 @@ public class LoginActivity extends AppCompatActivity {
         login_et_password = (EditText) findViewById(R.id.login_et_password);
         login_btn = (Button)findViewById(R.id.login_btn);
         signup_btn = findViewById(R.id.signin_btn);
+    }
+    private void mStartActivity(Class c){
+        Intent intent = new Intent(this,c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

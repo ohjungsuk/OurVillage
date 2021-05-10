@@ -96,6 +96,7 @@
         <EditText
             android:inputType="textNoSuggestions"
             android:id="@+id/signUP_edt_phoneNum"
+            android:textColor="@color/black"
             android:maxLength="30"
             android:singleLine="true"
             android:scrollHorizontally="false"
@@ -125,6 +126,7 @@
             android:inputType="textNoSuggestions"
             android:id="@+id/signUP_edt_Address"
             android:maxLength="30"
+            android:textColor="@color/black"
             android:singleLine="true"
             android:scrollHorizontally="false"
             android:layout_marginEnd="20dp"
@@ -155,6 +157,7 @@
             android:id="@+id/signUP_edt_Apart"
             android:maxLength="30"
             android:singleLine="true"
+            android:textColor="@color/black"
             android:scrollHorizontally="false"
             android:layout_marginEnd="20dp"
             android:textSize="16sp"
