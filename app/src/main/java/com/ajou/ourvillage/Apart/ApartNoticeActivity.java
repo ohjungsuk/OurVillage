@@ -13,7 +13,10 @@ import android.widget.TextView;
 
 import com.ajou.ourvillage.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ApartNoticeActivity extends AppCompatActivity {
 
@@ -27,7 +30,17 @@ public class ApartNoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apart_notice);
 
-        btn_close = findViewById(R.id.apart_notice_btn_close);
+        init();
+
+        long now = System.currentTimeMillis();
+
+        Date mDate = new Date(now);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+        String getTime = simpleDateFormat.format(mDate);
+
+        System.out.println("시간 " + getTime);
+
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +48,6 @@ public class ApartNoticeActivity extends AppCompatActivity {
             }
         });
 
-        btn_search = findViewById(R.id.apart_notice_btn_search);
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +55,6 @@ public class ApartNoticeActivity extends AppCompatActivity {
             }
         });
 
-        btn_write = findViewById(R.id.apart_notice_btn_write);
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +62,12 @@ public class ApartNoticeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void init() {
+        btn_close = findViewById(R.id.apart_notice_btn_close);
+        btn_search = findViewById(R.id.apart_notice_btn_search);
+        btn_write = findViewById(R.id.apart_notice_btn_write);
     }
 
     @Override
