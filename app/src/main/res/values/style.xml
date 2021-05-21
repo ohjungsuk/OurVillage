@@ -3,4 +3,5 @@
     <style name="theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="color">@color/theme</item>
     </style>
+
 </resources>
