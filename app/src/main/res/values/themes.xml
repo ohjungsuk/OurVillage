@@ -16,6 +16,7 @@
         <item name="windowNoTitle">true</item>
         <!-- 전체 화면 만들기 -->
         <item name="android:windowFullscreen">true</item>
+        <item name="cardBackgroundColor">?android:attr/colorBackgroundFloating</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
