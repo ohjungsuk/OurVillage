@@ -56,9 +56,6 @@ public class CommunityFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerViewDecoration spaceDecoration = new RecyclerViewDecoration(30);
-        recyclerView.addItemDecoration(spaceDecoration);
-
         ArrayList<CommunityPostItem> dataList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             dataList.add(new CommunityPostItem(R.drawable.ic_launcher_background, "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
