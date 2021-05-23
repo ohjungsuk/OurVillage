@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".kakaoApi"
@@ -16,22 +16,7 @@
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Apart.ApartNoticeWritePostActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Apart.ApartCommunityWritePostActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Apart.ApartHelpWritePostActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Apart.ApartCommunityActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Apart.ApartHelpActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Apart.ApartNoticeActivity"
+            android:name=".Apart.ApartWriteActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Login.SignUpActivity"

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.ajou.ourvillage.R;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class ApartFragment extends Fragment {
 
-    private Button btn_notice, btn_help, btn_community;
+    private TextView btn_write;
 
     public ApartFragment() {
         // Required empty public constructor
@@ -35,14 +36,21 @@ public class ApartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_apart, container, false);
 
-
+        btn_write = view.findViewById(R.id.apart_btn_write);
+        btn_write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ApartWriteActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
 
         RecyclerView recyclerView = getActivity().findViewById(R.id.apart_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
