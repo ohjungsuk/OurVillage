@@ -10,34 +10,54 @@
     tools:context=".Tasty.TastyFragment">
 
     <LinearLayout
-        android:background="#FFFFFF"
         android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/tasty_temp"
+        <RelativeLayout
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:clickable="true"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="fitXY"/>
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:textSize="30sp"
-            android:textColor="@android:color/black"
-            android:text="맛집 화면입니다." />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@android:color/black"
+                android:text="맛집 탐색"
+                tools:text="맛집 탐색" />
 
-        <ImageView
-            android:id="@+id/tasty_temp2"
+            <TextView
+                android:id="@+id/tasty_btn_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#00FFFFFF"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="20sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="글쓰기" />
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginHorizontal="15dp"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:clickable="true"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="fitXY"/>
+            android:layout_height="1dp"
+            android:background="#F1F2F4"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasty_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="15dp"
+            tools:listitem="@layout/item_post"/>
 
     </LinearLayout>
 

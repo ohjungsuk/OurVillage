@@ -3,9 +3,13 @@ package com.ajou.ourvillage.Login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +44,40 @@ public class SignUp_profile extends AppCompatActivity {
     private boolean activity_check = true;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore db;
+
+
+//    int PERMISSION_ALL = 1;
+//    String[] PERMISSIONS = {
+//            android.Manifest.permission.READ_CONTACTS,
+//            android.Manifest.permission.WRITE_CONTACTS,
+//            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//            android.Manifest.permission.READ_SMS,
+//            android.Manifest.permission.CAMERA
+//    };
+
+//    public boolean hasPermissions(Context context, String... permissions) {
+//        if (context != null && permissions != null) {
+//            for (String permission : permissions) {
+//                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//
+//    private void getPermission(){
+//
+//        ActivityCompat.requestPermissions(this,
+//                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE,
+//                        Manifest.permission.INTERNET,
+//                        Manifest.permission.ACCESS_NETWORK_STATE,
+//                        Manifest.permission.WAKE_LOCK
+//                },
+//                1000);
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,4 +189,37 @@ public class SignUp_profile extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    int PERMISSION_ALL = 1;
+    String[] PERMISSIONS = {
+            android.Manifest.permission.READ_CONTACTS,
+            android.Manifest.permission.WRITE_CONTACTS,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_SMS,
+            android.Manifest.permission.CAMERA
+    };
+
+    public boolean hasPermissions(OnCompleteListener<Void> context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission((Context) context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private void getPermission(){
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.WAKE_LOCK
+                },
+                1000);
+    }
+
 }

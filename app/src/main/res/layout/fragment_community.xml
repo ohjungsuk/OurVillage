@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@android:color/white"
-    android:id="@+id/apart_root"
-    tools:context=".Apart.ApartFragment">
+    android:id="@+id/post_root"
+    tools:context=".Community.CommunityFragment">
 
     <LinearLayout
         android:descendantFocusability="blocksDescendants"
@@ -21,17 +21,16 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/apart_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/black"
-                android:text="아파트 이름"
-                tools:text="아파트 이름" />
+                android:text="커뮤니티"
+                tools:text="커뮤니티" />
 
             <TextView
-                android:id="@+id/apart_btn_write"
+                android:id="@+id/community_btn_write"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -46,7 +45,6 @@
         </RelativeLayout>
 
 
-
         <View
             android:layout_marginHorizontal="15dp"
             android:layout_width="match_parent"
@@ -54,7 +52,7 @@
             android:background="#F1F2F4"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/apart_recyclerview"
+            android:id="@+id/community_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"

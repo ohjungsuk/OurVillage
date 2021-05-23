@@ -1,4 +1,4 @@
-package com.ajou.ourvillage.Apart;
+package com.ajou.ourvillage.Community;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +17,14 @@ import com.ajou.ourvillage.RecyclerViewDecoration;
 
 import java.util.ArrayList;
 
-public class ApartFragment extends Fragment {
+public class CommunityFragment extends Fragment {
 
     private TextView btn_write;
 
-    public ApartFragment() {
+    public CommunityFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,17 +35,16 @@ public class ApartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_apart, container, false);
+        View view = inflater.inflate(R.layout.fragment_community, container, false);
 
-        btn_write = view.findViewById(R.id.apart_btn_write);
+        btn_write = view.findViewById(R.id.community_btn_write);
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ApartWriteActivity.class);
+                Intent intent = new Intent(getActivity(), CommunityWriteActivity.class);
                 startActivity(intent);
             }
         });
-
         return view;
     }
 
@@ -52,22 +52,21 @@ public class ApartFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        RecyclerView recyclerView = getActivity().findViewById(R.id.apart_recyclerview);
+        RecyclerView recyclerView = getActivity().findViewById(R.id.community_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         RecyclerViewDecoration spaceDecoration = new RecyclerViewDecoration(30);
         recyclerView.addItemDecoration(spaceDecoration);
 
-        ArrayList<ApartPostItem> dataList = new ArrayList<>();
+        ArrayList<CommunityPostItem> dataList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            dataList.add(new ApartPostItem(R.drawable.ic_launcher_background, "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
+            dataList.add(new CommunityPostItem(R.drawable.ic_launcher_background, "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
         }
 
-        ApartPostAdapter apartPostAdapter = new ApartPostAdapter(dataList);
-        recyclerView.setAdapter(apartPostAdapter);
+        CommunityPostAdapter communityPostAdapter = new CommunityPostAdapter(dataList);
+        recyclerView.setAdapter(communityPostAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
-
 
 }

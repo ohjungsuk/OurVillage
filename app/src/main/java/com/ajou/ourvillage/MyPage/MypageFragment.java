@@ -17,9 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ajou.ourvillage.Apart.ApartCommunityActivity;
-import com.ajou.ourvillage.Apart.ApartHelpActivity;
-import com.ajou.ourvillage.Apart.ApartNoticeActivity;
 import com.ajou.ourvillage.Login.LoginActivity;
 import com.ajou.ourvillage.MainActivity;
 import com.ajou.ourvillage.R;

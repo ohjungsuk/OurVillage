@@ -1,10 +1,12 @@
 package com.ajou.ourvillage;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -15,6 +17,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -44,6 +47,8 @@ import java.security.MessageDigest;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
+    private PermissionSupport permission;
+
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore db;
@@ -59,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        permissionCheck(); // 권한 요청
+
         Log.d("stack","MainActivity");
         setUp();
         //HashKey();
@@ -295,5 +303,31 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    // 권한 체크
+    private void permissionCheck(){
+
+        // SDK 23버전 이하 버전에서는 Permission 불필요
+        if(Build.VERSION.SDK_INT >= 23){
+            // 방금 전 만들었던 클래스 객체 생성
+            permission = new PermissionSupport(this, this);
+
+            // 권한 체크한 후에 리턴이 false로 들어온다면
+            if (!permission.checkPermission()){
+                // 권한 요청을 해준다.
+                permission.requestPermission();
+            }
+        }
+    }
+
+    // Request Permission에 대한 결과 값을 받아올 수 있습니다.
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // 여기서도 리턴이 false로 들어온다면 (사용자가 권한 허용을 거부하였다면)
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (!permission.permissionResult(requestCode, permissions, grantResults)) {
+            // 여기서 다시 Permission 요청
+            permission.requestPermission();
+        }
     }
 }
