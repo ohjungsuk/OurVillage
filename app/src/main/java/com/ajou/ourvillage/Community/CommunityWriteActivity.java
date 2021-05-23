@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.ajou.ourvillage.Apart.ApartImageService;
 import com.ajou.ourvillage.Apart.ApartWriteActivity;
 import com.ajou.ourvillage.Main.GalleryAcitivity;
 import com.ajou.ourvillage.Main.WriteFeedInfo;
@@ -31,10 +32,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 
-public class CommunityWriteActivity extends AppCompatActivity {
+public class CommunityWriteActivity extends AppCompatActivity implements CommunityImageInterface {
 
     private static final String TAG = "CommunityWrite";
 
@@ -46,6 +49,7 @@ public class CommunityWriteActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private boolean activity_stack_check = true;
 
+    private Uri mImgUri;
     final int GET_GALLERY_IMAGE = 200;
     final int REQUEST_IMAGE_CODE = 1001;
 
@@ -64,6 +68,7 @@ public class CommunityWriteActivity extends AppCompatActivity {
         btn_community_write = (Button)findViewById(R.id.community_write_btn_complete);
         btn_backToMain = (ImageButton) findViewById(R.id.community_write_btn_close);
         img_upload = (ImageView) findViewById(R.id.community_write_btn_img);
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public void btnMover(){
@@ -99,58 +104,27 @@ public class CommunityWriteActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, REQUEST_IMAGE_CODE);
 
-
-//                //권한이 없을떄
-//                if(ContextCompat.checkSelfPermission(ApartWriteActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-//                    if(ActivityCompat.shouldShowRequestPermissionRationale(ApartWriteActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-//                        ActivityCompat.requestPermissions(ApartWriteActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-//                    }else{ //권한 다시 물어보는 경우
-//                        ActivityCompat.requestPermissions(ApartWriteActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-//                        Toast.makeText(getApplicationContext(),
-//                                "권한을 허용해주세요", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else{//권한이 있을때
-//                    Intent intent = new Intent(ApartWriteActivity.this, GalleryAcitivity.class);
-//                    startActivity(intent);
-//                    //finish();
-//                }
             }
         });
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case 1: {
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Intent intent = new Intent(CommunityWriteActivity.this, GalleryAcitivity.class);
-//                    startActivity(intent);
-//                    //finish();
-//                } else {
-//                    Toast.makeText(getApplicationContext(),
-//                            "권한을 허용해주세요", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//    }
 
     private void post(){
         final String title = et_community_title.getText().toString();
-        final String comment = et_community_content.getText().toString();
+        final String content = et_community_content.getText().toString();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(title.length() > 0 && comment.length() > 0){
-            WriteFeedInfo writeFeedInfo = new WriteFeedInfo(title,comment,firebaseUser.getEmail());
-            uploadToDB(writeFeedInfo);
+        if(title.length() > 0 && content.length() > 0){
+            CommunityPostItem communityPostItem = new CommunityPostItem(R.drawable.ic_launcher_background, firebaseUser.getEmail(), "2021.05.23.Sun 08:24", title, content, "5", "3", false);
+            uploadToDB(communityPostItem);
         }
     }
-    private void uploadToDB(WriteFeedInfo writeFeedInfo){
+    private void uploadToDB(CommunityPostItem communityPostItem){
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //반복문 유의
-        db.collection("Feed")
-                .add(writeFeedInfo)
+        db.collection("Community")
+                .add(communityPostItem)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -190,25 +164,27 @@ public class CommunityWriteActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-//                uploadImage(image);
+                uploadImage(image);
             }
         }
     }
 
-//    //찍은 사진의 Uri를 FireBase에 전송하고
-//    private void uploadImage(Uri imgUri) {
-//        final BandCreateService bandCreateService = new BandCreateService(this);
-//        bandCreateService.uploadFileToFireBase(imgUri);
-//    }
-//    //그 경로를 받아옵니다.
-//    @Override
-//    public void upLoadFireBaseSuccess(Uri uri) {
-//        mImgUri = uri;
-//        showCustomToast("firebase uri: " + mImgUri);
-////        try {
-//        //upLoadUri(String.valueOf(mImgUri));
-////        } catch (JSONException e) {
-////            e.printStackTrace();
-////        }
-//    }
+    // Uri를 FireBase에 전송하고
+    private void uploadImage(Uri imgUri) {
+        final CommunityImageService communityImageService = new CommunityImageService(this);
+        communityImageService.uploadFileToFireBase(imgUri);
+    }
+
+    // 경로 받아오기
+    @Override
+    public void uploadFireBaseSuccess(Uri uri) {
+        mImgUri = uri;
+        Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void uploadFireBaseFailure() {
+        Toast.makeText(getApplicationContext(), "firebase upload fail ", Toast.LENGTH_SHORT).show();
+    }
 }

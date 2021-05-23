@@ -111,20 +111,22 @@ public class ApartWriteActivity extends AppCompatActivity implements ApartImageI
 
     private void post(){
         final String title = et_apart_title.getText().toString();
-        final String comment = et_apart_content.getText().toString();
+        final String content = et_apart_content.getText().toString();
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(title.length() > 0 && comment.length() > 0){
-            WriteFeedInfo writeFeedInfo = new WriteFeedInfo(title,comment,firebaseUser.getEmail());
-            uploadToDB(writeFeedInfo);
+        if (title.length() > 0 && content.length() > 0){
+            ApartPostItem apartPostItem = new ApartPostItem(mImgUri.toString(), firebaseUser.getEmail(), "2021.05.23.Sun 08:24", title, content, "5", "3", false);
+            uploadToDB(apartPostItem);
         }
     }
-    private void uploadToDB(WriteFeedInfo writeFeedInfo){
+
+    private void uploadToDB(ApartPostItem apartPostItem){
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //반복문 유의
-        db.collection("Feed")
-                .add(writeFeedInfo)
+        db.collection("Apart")
+                .add(apartPostItem)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {

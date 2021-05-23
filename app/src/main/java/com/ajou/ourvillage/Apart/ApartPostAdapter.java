@@ -1,5 +1,6 @@
 package com.ajou.ourvillage.Apart;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ajou.ourvillage.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.ViewHolder>{
 
     private final ArrayList<ApartPostItem> mDataList;
+    private Context mContext;
 
     public ApartPostAdapter(ArrayList<ApartPostItem> mDataList) {
         this.mDataList = mDataList;
@@ -24,7 +27,8 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_post, parent, false);
         return new ViewHolder(view);
     }
 
@@ -32,7 +36,14 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ApartPostItem item = mDataList.get(position);
 
-        holder.img_profile.setImageResource(item.getImg_profile());
+//        Glide.with(mContext).load(item.getImg_profile()).into(holder.img_profile);
+
+//        if (item.getImg_profile().equals("default")){
+//            holder.img_profile.setImageResource(R.mipmap.ic_launcher);
+//        } else {
+//            Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+//        }
+//        holder.img_profile.setImageResource(item.getImg_profile());
         holder.tv_writer.setText(item.getWriter());
         holder.tv_title.setText(item.getTitle());
         holder.tv_content.setText(item.getContent());

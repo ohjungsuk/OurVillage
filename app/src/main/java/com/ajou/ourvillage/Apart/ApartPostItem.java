@@ -1,7 +1,7 @@
 package com.ajou.ourvillage.Apart;
 
 public class ApartPostItem {
-    private int img_profile; // 글 작성자의 프로필 이미지
+    private String img_profile; // 글 작성자의 프로필 이미지 uri
     private String writer; // 글 작성자
     private String date; // 글 작성 시간
     private String title; // 글 제목
@@ -10,7 +10,7 @@ public class ApartPostItem {
     private String commentCount; // 댓글 갯수
     private boolean like; // 좋아요 클릭 여부
 
-    public ApartPostItem(int img_profile, String writer, String date, String title, String content, String likeCnt, String commentCount, boolean like) {
+    public ApartPostItem(String img_profile, String writer, String date, String title, String content, String likeCnt, String commentCount, boolean like) {
         this.img_profile = img_profile;
         this.writer = writer;
         this.date = date;
@@ -21,11 +21,11 @@ public class ApartPostItem {
         this.like = like;
     }
 
-    public int getImg_profile() {
+    public String getImg_profile() {
         return img_profile;
     }
 
-    public void setImg_profile(int img_profile) {
+    public void setImg_profile(String img_profile) {
         this.img_profile = img_profile;
     }
 
