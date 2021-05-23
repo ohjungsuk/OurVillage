@@ -1,13 +1,10 @@
-package com.ajou.ourvillage.Apart;
+package com.ajou.ourvillage.Community;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,7 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.ajou.ourvillage.Main.AddMyFeed;
+import com.ajou.ourvillage.Apart.ApartWriteActivity;
 import com.ajou.ourvillage.Main.GalleryAcitivity;
 import com.ajou.ourvillage.Main.WriteFeedInfo;
 import com.ajou.ourvillage.R;
@@ -37,14 +34,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.InputStream;
 
-public class ApartWriteActivity extends AppCompatActivity {
+public class CommunityWriteActivity extends AppCompatActivity {
 
-    private static final String TAG = "ApartWrite";
+    private static final String TAG = "CommunityWrite";
 
     private ImageButton btn_backToMain;
     private ImageView img_upload;
-    private Button btn_apart_write;
-    private EditText et_apart_content, et_apart_title;
+    private Button btn_community_write;
+    private EditText et_community_content, et_community_title;
     private FirebaseFirestore db;
     private FirebaseUser firebaseUser;
     private boolean activity_stack_check = true;
@@ -55,25 +52,25 @@ public class ApartWriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apart_write);
+        setContentView(R.layout.activity_community_write);
 
         init();
         btnMover();
     }
 
     public void init(){
-        et_apart_content = (EditText)findViewById(R.id.apart_write_et_content);
-        et_apart_title = (EditText)findViewById(R.id.apart_write_et_title);
-        btn_apart_write = (Button)findViewById(R.id.apart_write_btn_complete);
-        btn_backToMain = (ImageButton) findViewById(R.id.apart_write_btn_close);
-        img_upload = (ImageView) findViewById(R.id.apart_write_btn_img);
+        et_community_content = (EditText)findViewById(R.id.community_write_et_content);
+        et_community_title = (EditText)findViewById(R.id.community_write_et_title);
+        btn_community_write = (Button)findViewById(R.id.community_write_btn_complete);
+        btn_backToMain = (ImageButton) findViewById(R.id.community_write_btn_close);
+        img_upload = (ImageView) findViewById(R.id.community_write_btn_img);
     }
 
     public void btnMover(){
         btn_backToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(ApartWriteActivity.this)
+                new AlertDialog.Builder(CommunityWriteActivity.this)
                         .setMessage("뒤로가시면 내용이 저장되지 않습니다.")
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
@@ -90,7 +87,7 @@ public class ApartWriteActivity extends AppCompatActivity {
                         }).show();
             }
         });
-        btn_apart_write.setOnClickListener(new View.OnClickListener() {
+        btn_community_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 post();
@@ -127,7 +124,7 @@ public class ApartWriteActivity extends AppCompatActivity {
 //        switch (requestCode) {
 //            case 1: {
 //                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Intent intent = new Intent(ApartWriteActivity.this, GalleryAcitivity.class);
+//                    Intent intent = new Intent(CommunityWriteActivity.this, GalleryAcitivity.class);
 //                    startActivity(intent);
 //                    //finish();
 //                } else {
@@ -139,8 +136,8 @@ public class ApartWriteActivity extends AppCompatActivity {
 //    }
 
     private void post(){
-        final String title = et_apart_title.getText().toString();
-        final String comment = et_apart_content.getText().toString();
+        final String title = et_community_title.getText().toString();
+        final String comment = et_community_content.getText().toString();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(title.length() > 0 && comment.length() > 0){

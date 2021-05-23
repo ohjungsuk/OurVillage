@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".Apart.ApartWriteActivity">
+    tools:context=".Community.CommunityWriteActivity">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -17,7 +17,7 @@
         android:layout_margin="10dp">
 
         <ImageButton
-            android:id="@+id/apart_write_btn_close"
+            android:id="@+id/community_write_btn_close"
             android:stateListAnimator="@null"
             android:background="@android:color/white"
             android:maxHeight="3dp"
@@ -41,7 +41,7 @@
             android:layout_height="match_parent"/>
 
         <Button
-            android:id="@+id/apart_write_btn_complete"
+            android:id="@+id/community_write_btn_complete"
             android:stateListAnimator="@null"
             android:background="@drawable/rounding_btn"
             android:layout_gravity="center_vertical"
@@ -61,7 +61,7 @@
 
 
     <EditText
-        android:id="@+id/apart_write_et_title"
+        android:id="@+id/community_write_et_title"
         android:layout_marginTop="10dp"
         android:gravity="top"
         android:padding="20dp"
@@ -94,7 +94,7 @@
             android:textColor="@color/theme"/>
 
         <ImageView
-            android:id="@+id/apart_write_btn_img"
+            android:id="@+id/community_write_btn_img"
             android:background="@drawable/image"
             android:layout_width="150dp"
             android:layout_height="135dp"
@@ -126,7 +126,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/apart_write_et_content"
+                android:id="@+id/community_write_et_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -138,6 +138,5 @@
                 android:textColorHint="@color/theme" />
         </LinearLayout>
     </ScrollView>
-
 
 </LinearLayout>

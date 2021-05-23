@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/post_root"
+    tools:context=".Community.CommunityFragment">
+
+    <LinearLayout
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@android:color/black"
+                android:text="커뮤니티"
+                tools:text="커뮤니티" />
+
+            <TextView
+                android:id="@+id/community_btn_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#00FFFFFF"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="20sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="글쓰기" />
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F1F2F4"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/community_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="15dp"
+            tools:listitem="@layout/item_post"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

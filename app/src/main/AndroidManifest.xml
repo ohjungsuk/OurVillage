@@ -16,6 +16,9 @@
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Community.CommunityWriteActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
             android:name=".Apart.ApartWriteActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity

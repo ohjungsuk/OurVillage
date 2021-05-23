@@ -1,4 +1,4 @@
-package com.ajou.ourvillage.Apart;
+package com.ajou.ourvillage;
 
 import android.graphics.Rect;
 import android.view.View;
