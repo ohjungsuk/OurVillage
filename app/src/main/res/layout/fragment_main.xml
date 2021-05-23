@@ -1,62 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/post_root"
+    tools:context=".MainActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_margin="25dp"
-        android:backgroundTint="@android:color/white"
-        android:clickable="true"
-        android:src="@drawable/ic_more"
-        app:fabSize="auto" />
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:id="@+id/main_root"
-        tools:context=".Main.MainFragment"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:background="#FFFFFF"
-            android:descendantFocusability="blocksDescendants"
+        <RelativeLayout
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/main_temp"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:clickable="true"
-                android:src="@drawable/ic_launcher_background"
-                android:scaleType="fitXY"/>
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:textSize="30sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/black"
-                android:text="메인 화면입니다." />
+                android:text="메인 피드"
+                tools:text="메인 피드" />
 
-            <ImageView
-                android:id="@+id/main_temp2"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
+            <TextView
+                android:id="@+id/main_btn_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#00FFFFFF"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="20sp"
                 android:clickable="true"
-                android:src="@drawable/ic_launcher_background"
-                android:scaleType="fitXY"/>
+                android:focusable="true"
+                android:text="글쓰기" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <View
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F1F2F4"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="15dp"
+            tools:listitem="@layout/item_post"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

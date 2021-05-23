@@ -12,11 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ajou.ourvillage.Apart.ApartPostAdapter;
-import com.ajou.ourvillage.Apart.ApartPostItem;
 import com.ajou.ourvillage.Apart.ApartWriteActivity;
 import com.ajou.ourvillage.R;
-import com.ajou.ourvillage.RecyclerViewDecoration;
 
 import java.util.ArrayList;
 
@@ -60,9 +57,6 @@ public class TastyFragment extends Fragment {
         RecyclerView recyclerView = getActivity().findViewById(R.id.tasty_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-        RecyclerViewDecoration spaceDecoration = new RecyclerViewDecoration(30);
-        recyclerView.addItemDecoration(spaceDecoration);
 
         ArrayList<TastyPostItem> dataList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {

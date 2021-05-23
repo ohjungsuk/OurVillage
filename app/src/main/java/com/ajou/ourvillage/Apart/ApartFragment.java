@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ajou.ourvillage.R;
-import com.ajou.ourvillage.RecyclerViewDecoration;
 
 import java.util.ArrayList;
 
@@ -56,18 +55,15 @@ public class ApartFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerViewDecoration spaceDecoration = new RecyclerViewDecoration(30);
-        recyclerView.addItemDecoration(spaceDecoration);
 
         ArrayList<ApartPostItem> dataList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            dataList.add(new ApartPostItem(R.drawable.ic_launcher_background, "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
+            dataList.add(new ApartPostItem("gs://ourvillage-d0fd0.appspot.com/apart/2355", "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
         }
 
         ApartPostAdapter apartPostAdapter = new ApartPostAdapter(dataList);
         recyclerView.setAdapter(apartPostAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
-
 
 }
