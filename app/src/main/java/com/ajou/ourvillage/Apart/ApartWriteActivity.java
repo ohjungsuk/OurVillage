@@ -34,10 +34,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 
-public class ApartWriteActivity extends AppCompatActivity {
+public class ApartWriteActivity extends AppCompatActivity implements ApartImageInterface {
 
     private static final String TAG = "ApartWrite";
 
@@ -49,6 +51,7 @@ public class ApartWriteActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private boolean activity_stack_check = true;
 
+    private Uri mImgUri;
     final int GET_GALLERY_IMAGE = 200;
     final int REQUEST_IMAGE_CODE = 1001;
 
@@ -67,6 +70,7 @@ public class ApartWriteActivity extends AppCompatActivity {
         btn_apart_write = (Button)findViewById(R.id.apart_write_btn_complete);
         btn_backToMain = (ImageButton) findViewById(R.id.apart_write_btn_close);
         img_upload = (ImageView) findViewById(R.id.apart_write_btn_img);
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public void btnMover(){
@@ -104,23 +108,6 @@ public class ApartWriteActivity extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case 1: {
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Intent intent = new Intent(ApartWriteActivity.this, GalleryAcitivity.class);
-//                    startActivity(intent);
-//                    //finish();
-//                } else {
-//                    Toast.makeText(getApplicationContext(),
-//                            "권한을 허용해주세요", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//    }
 
     private void post(){
         final String title = et_apart_title.getText().toString();
@@ -177,25 +164,27 @@ public class ApartWriteActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-//                uploadImage(image);
+                uploadImage(image);
             }
         }
     }
 
-//    //찍은 사진의 Uri를 FireBase에 전송하고
-//    private void uploadImage(Uri imgUri) {
-//        final BandCreateService bandCreateService = new BandCreateService(this);
-//        bandCreateService.uploadFileToFireBase(imgUri);
-//    }
-//    //그 경로를 받아옵니다.
-//    @Override
-//    public void upLoadFireBaseSuccess(Uri uri) {
-//        mImgUri = uri;
-//        showCustomToast("firebase uri: " + mImgUri);
-////        try {
-//        //upLoadUri(String.valueOf(mImgUri));
-////        } catch (JSONException e) {
-////            e.printStackTrace();
-////        }
-//    }
+    // Uri를 FireBase에 전송하고
+    private void uploadImage(Uri imgUri) {
+        final ApartImageService apartImageService = new ApartImageService(this);
+        apartImageService.uploadFileToFireBase(imgUri);
+    }
+
+    // 경로 받아오기
+    @Override
+    public void uploadFireBaseSuccess(Uri uri) {
+        mImgUri = uri;
+        Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void uploadFireBaseFailure() {
+        Toast.makeText(getApplicationContext(), "firebase upload fail ", Toast.LENGTH_SHORT).show();
+    }
 }
