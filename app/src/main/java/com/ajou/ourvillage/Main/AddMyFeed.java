@@ -90,7 +90,7 @@ public class AddMyFeed extends AppCompatActivity {
             public void onClick(View view) {
                 //권한이 없을떄
                 if(ContextCompat.checkSelfPermission(AddMyFeed.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                    if(ActivityCompat.shouldShowRequestPermissionRationale(AddMyFeed.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(AddMyFeed.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
                         ActivityCompat.requestPermissions(AddMyFeed.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                     }else{ //권한 다시 물어보는 경우
                         ActivityCompat.requestPermissions(AddMyFeed.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);

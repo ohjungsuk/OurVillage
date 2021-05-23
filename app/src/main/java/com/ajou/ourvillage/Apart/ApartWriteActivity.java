@@ -101,22 +101,6 @@ public class ApartWriteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, REQUEST_IMAGE_CODE);
-
-
-//                //권한이 없을떄
-//                if(ContextCompat.checkSelfPermission(ApartWriteActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-//                    if(ActivityCompat.shouldShowRequestPermissionRationale(ApartWriteActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-//                        ActivityCompat.requestPermissions(ApartWriteActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-//                    }else{ //권한 다시 물어보는 경우
-//                        ActivityCompat.requestPermissions(ApartWriteActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-//                        Toast.makeText(getApplicationContext(),
-//                                "권한을 허용해주세요", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else{//권한이 있을때
-//                    Intent intent = new Intent(ApartWriteActivity.this, GalleryAcitivity.class);
-//                    startActivity(intent);
-//                    //finish();
-//                }
             }
         });
     }
