@@ -1,66 +1,76 @@
 package com.ajou.ourvillage.Tasty;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.ajou.ourvillage.Apart.ApartPostAdapter;
+import com.ajou.ourvillage.Apart.ApartPostItem;
+import com.ajou.ourvillage.Apart.ApartWriteActivity;
 import com.ajou.ourvillage.R;
+import com.ajou.ourvillage.RecyclerViewDecoration;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TastyFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class TastyFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private TextView btn_write;
 
     public TastyFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TastyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TastyFragment newInstance(String param1, String param2) {
-        TastyFragment fragment = new TastyFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tasty, container, false);
+        View view = inflater.inflate(R.layout.fragment_tasty, container, false);
+
+        btn_write = view.findViewById(R.id.tasty_btn_write);
+        btn_write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ApartWriteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        RecyclerView recyclerView = getActivity().findViewById(R.id.tasty_recyclerview);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        RecyclerViewDecoration spaceDecoration = new RecyclerViewDecoration(30);
+        recyclerView.addItemDecoration(spaceDecoration);
+
+        ArrayList<TastyPostItem> dataList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            dataList.add(new TastyPostItem(R.drawable.ic_launcher_background, "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
+        }
+
+        TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);
+        recyclerView.setAdapter(tastyPostAdapter);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
