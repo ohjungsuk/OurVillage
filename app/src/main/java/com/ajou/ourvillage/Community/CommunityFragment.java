@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ajou.ourvillage.R;
-import com.ajou.ourvillage.RecyclerViewDecoration;
 
 import java.util.ArrayList;
 
