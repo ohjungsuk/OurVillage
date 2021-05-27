@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        permissionCheck(); // 권한 요청
+        //permissionCheck(); // 권한 요청
 
         Log.d("stack","MainActivity");
         setUp();

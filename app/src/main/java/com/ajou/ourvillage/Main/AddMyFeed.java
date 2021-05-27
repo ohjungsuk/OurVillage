@@ -1,6 +1,7 @@
 package com.ajou.ourvillage.Main;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -10,17 +11,29 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.ajou.ourvillage.Apart.ApartImageService;
+import com.ajou.ourvillage.Apart.ApartPostItem;
+import com.ajou.ourvillage.Apart.ImageInterface;
 import com.ajou.ourvillage.Login.SignUp_profile;
 import com.ajou.ourvillage.MainActivity;
 import com.ajou.ourvillage.R;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,15 +45,31 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class AddMyFeed extends AppCompatActivity {
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class AddMyFeed extends AppCompatActivity implements ImageInterface {
     private static final String TAG = "AddMyFeed";
 
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private LinearLayout image_layout;
+    private ImageView imageView;
     private ImageButton btn_backToMain,imgbtn_upload;
     private Button btn_feed_write;
     private EditText edt_feed_comment,edt_feed_title;
     private FirebaseFirestore db;
     private FirebaseUser firebaseUser;
     private boolean activity_stack_check = true;
+    private ArrayList<String> pathList = new ArrayList<>();
+
+    private Uri mImgUri;
+    final int GET_GALLERY_IMAGE = 200;
+    final int REQUEST_IMAGE_CODE = 1001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +80,8 @@ public class AddMyFeed extends AppCompatActivity {
     }
 
     public void init(){
+        image_layout = (LinearLayout)findViewById(R.id.image_layout);
+        imageView = (ImageView)findViewById(R.id.imageView);
         edt_feed_comment = (EditText)findViewById(R.id.edt_feed_comment);
         edt_feed_title = (EditText)findViewById(R.id.edt_feed_title);
         btn_feed_write = (Button)findViewById(R.id.btn_feed_write);
@@ -88,51 +119,38 @@ public class AddMyFeed extends AppCompatActivity {
         imgbtn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //권한이 없을떄
-                if(ContextCompat.checkSelfPermission(AddMyFeed.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(AddMyFeed.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
-                        ActivityCompat.requestPermissions(AddMyFeed.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                    }else{ //권한 다시 물어보는 경우
-                        ActivityCompat.requestPermissions(AddMyFeed.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                        Toast.makeText(getApplicationContext(),
-                                "권한을 허용해주세요", Toast.LENGTH_SHORT).show();
-                    }
-                }else{//권한이 있을때
-                    Intent intent = new Intent(AddMyFeed.this,GalleryAcitivity.class);
-                    startActivity(intent);
-                    //finish();
-                }
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_IMAGE_CODE);
             }
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent intent = new Intent(AddMyFeed.this, GalleryAcitivity.class);
-                    startActivity(intent);
-                    //finish();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "권한을 허용해주세요", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
 
     private void post(){
         final String title = edt_feed_title.getText().toString();
-        final String comment = edt_feed_comment.getText().toString();
+        final String content = edt_feed_comment.getText().toString();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(title.length() > 0 && comment.length() > 0){
-            WriteFeedInfo writeFeedInfo = new WriteFeedInfo(title,comment,firebaseUser.getEmail());
+        if(title.length() > 0 && content.length() > 0) {
+            ArrayList<String> contentsList = new ArrayList<>();
+            if(content.length() > 0){
+                contentsList.add(content);
+            }
+            String name = null;
+            for (UserInfo profile : firebaseUser.getProviderData()) {
+                name = profile.getDisplayName();
+            }                                                                   //mImgUri.toString(),
+            WriteFeedInfo writeFeedInfo = new WriteFeedInfo(name, getTime(), title, mImgUri.toString(), content, "5", "3");
             uploadToDB(writeFeedInfo);
         }
     }
+
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
+
     private void uploadToDB(WriteFeedInfo writeFeedInfo){
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -143,7 +161,7 @@ public class AddMyFeed extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(getApplicationContext(),
-                                     "게시물 등록 완료", Toast.LENGTH_SHORT).show();
+                                "게시물 등록 완료", Toast.LENGTH_SHORT).show();
                         finish();
                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                     }
@@ -156,30 +174,63 @@ public class AddMyFeed extends AppCompatActivity {
                                 "게시물 등록 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-//        for (UserInfo profile : firebaseUser.getProviderData()) {
-//            String db_email = profile.getEmail();
-//            db.collection(db_email).document(firebaseUser.getUid()).set(writeFeedInfo)
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            if(activity_stack_check){
-//                                Toast.makeText(getApplicationContext(),
-//                                        "게시물 등록 완료", Toast.LENGTH_SHORT).show();
-//                                finish();
-//                                activity_stack_check = false;
-//                            }
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(getApplicationContext(),
-//                                    "게시물 등록 실패", Toast.LENGTH_SHORT).show();
-//                            Log.w(TAG, "Error writing document", e);
-//                        }
-//                    });
-//        }
+        if (requestCode == REQUEST_IMAGE_CODE) {
+            Uri image = data.getData();
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                try {
+//                    // 선택한 이미지에서 비트맵 생성
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+//                    pathList.add(img);
+//                    // 이미지뷰에 세팅
+//                    imageView.setImageBitmap(img);
+//                    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//                    ImageView mimageView = new ImageView(AddMyFeed.this);
+//                    mimageView.setLayoutParams(layoutParams);
+                    Glide.with(this).load(img).override(1000).into(imageView);
+//                    image_layout.addView(imageView);
+//
+//                    EditText editText = new EditText(AddMyFeed.this);
+//                    editText.setLayoutParams(layoutParams);
+//                    editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_CLASS_TEXT);
+//                    image_layout.addView(editText);
+
+                    if (imageView.getVisibility()==View.GONE){
+                        imageView.setVisibility(View.VISIBLE);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                uploadImage(image);
+            }
+        }
+    }
+    // Uri를 FireBase에 전송하고
+    private void uploadImage(Uri imgUri) {
+        final FeedImageService feedImageService = new FeedImageService(this);
+        feedImageService.uploadFileToFireBase(imgUri);
     }
 
+    // 경로 받아오기
+    @Override
+    public void uploadFireBaseSuccess(Uri uri) {
+        mImgUri = uri;
+        Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void uploadFireBaseFailure() {
+        Toast.makeText(getApplicationContext(), "firebase upload fail ", Toast.LENGTH_SHORT).show();
+    }
 }

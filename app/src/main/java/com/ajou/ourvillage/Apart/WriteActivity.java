@@ -4,13 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -24,9 +20,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.ajou.ourvillage.Main.AddMyFeed;
-import com.ajou.ourvillage.Main.GalleryAcitivity;
-import com.ajou.ourvillage.Main.WriteFeedInfo;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,12 +32,12 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 
-public class ApartWriteActivity extends AppCompatActivity implements ApartImageInterface {
+public class WriteActivity extends AppCompatActivity implements ImageInterface {
 
     private static final String TAG = "ApartWrite";
 
     private ImageButton btn_backToMain;
-    private ImageView img_upload;
+    private ImageButton img_upload;
     private Button btn_apart_write;
     private EditText et_apart_content, et_apart_title;
     private FirebaseFirestore db;
@@ -69,7 +62,7 @@ public class ApartWriteActivity extends AppCompatActivity implements ApartImageI
         et_apart_title = (EditText)findViewById(R.id.apart_write_et_title);
         btn_apart_write = (Button)findViewById(R.id.apart_write_btn_complete);
         btn_backToMain = (ImageButton) findViewById(R.id.apart_write_btn_close);
-        img_upload = (ImageView) findViewById(R.id.apart_write_btn_img);
+        img_upload = (ImageButton) findViewById(R.id.apart_write_btn_img);
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
@@ -77,7 +70,7 @@ public class ApartWriteActivity extends AppCompatActivity implements ApartImageI
         btn_backToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(ApartWriteActivity.this)
+                new AlertDialog.Builder(WriteActivity.this)
                         .setMessage("뒤로가시면 내용이 저장되지 않습니다.")
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override

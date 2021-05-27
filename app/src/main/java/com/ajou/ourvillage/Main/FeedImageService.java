@@ -1,10 +1,12 @@
-package com.ajou.ourvillage.Community;
+package com.ajou.ourvillage.Main;
 
 import android.app.ProgressDialog;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+import com.ajou.ourvillage.Apart.ImageInterface;
+import com.ajou.ourvillage.Apart.WriteActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -15,22 +17,22 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class CommunityImageService {
-    private final CommunityImageInterface mCommunityImageInterface;
+public class FeedImageService {
+    private final ImageInterface mImageInterface;
 
-    public CommunityImageService(CommunityImageInterface mCommunityImageInterface) {
-        this.mCommunityImageInterface = mCommunityImageInterface;
+    public FeedImageService(ImageInterface mImageInterface){
+        this.mImageInterface = mImageInterface;
     }
 
     public void uploadFileToFireBase(Uri imgUri) {
-        final ProgressDialog progressDialog = new ProgressDialog((CommunityWriteActivity) mCommunityImageInterface);
+        final ProgressDialog progressDialog = new ProgressDialog((AddMyFeed) mImageInterface);
         progressDialog.setTitle("Uploading..");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         final StorageReference storageRef = storage.getReferenceFromUrl("gs://ourvillage-d0fd0.appspot.com/")
-                .child("community/" + imgUri.getLastPathSegment());
+                .child("Feed/" + imgUri.getLastPathSegment());
 
         UploadTask uploadTask = storageRef.putFile(imgUri);
         storageRef.putFile(imgUri)
@@ -46,7 +48,7 @@ public class CommunityImageService {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        mCommunityImageInterface.uploadFireBaseFailure();
+                        mImageInterface.uploadFireBaseFailure();
                     }
                 })
                 //진행중
@@ -72,10 +74,10 @@ public class CommunityImageService {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();  // downloadUri -> 이게 업로드 완료된  url임
                     progressDialog.dismiss();
-                    mCommunityImageInterface.uploadFireBaseSuccess(downloadUri);
+                    mImageInterface.uploadFireBaseSuccess(downloadUri);
                 } else {
                     progressDialog.dismiss();
-                    mCommunityImageInterface.uploadFireBaseFailure();
+                    mImageInterface.uploadFireBaseFailure();
                 }
             }
         });

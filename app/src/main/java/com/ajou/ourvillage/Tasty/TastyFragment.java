@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ajou.ourvillage.Apart.ApartWriteActivity;
+import com.ajou.ourvillage.Apart.WriteActivity;
 import com.ajou.ourvillage.R;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class TastyFragment extends Fragment {
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ApartWriteActivity.class);
+                Intent intent = new Intent(getActivity(), WriteActivity.class);
                 startActivity(intent);
             }
         });
