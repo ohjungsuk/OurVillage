@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.ajou.ourvillage.Apart.ApartFragment;
+import com.ajou.ourvillage.Friend.FriendFragment;
 import com.ajou.ourvillage.Main.MainFragment;
 import com.ajou.ourvillage.MyPage.MypageFragment;
 import com.ajou.ourvillage.Community.CommunityFragment;
@@ -32,8 +33,8 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
                 ApartFragment apartFragment = new ApartFragment();
                 return apartFragment;
             case 2:
-                CommunityFragment communityFragment = new CommunityFragment();
-                return communityFragment;
+                FriendFragment friendFragment = new FriendFragment();
+                return friendFragment;
             case 3:
                 TastyFragment tastyFragment = new TastyFragment();
                 return tastyFragment;
