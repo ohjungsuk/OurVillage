@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Friend.ShowAllUsers"></activity>
+        <activity
+            android:name=".Tasty.TastyMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar"/>
+        <activity android:name=".Friend.ShowAllUsers" />
         <activity
             android:name=".Tasty.TastyWriteActivity"
             android:screenOrientation="portrait"
@@ -45,6 +49,9 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAV_XzdLrmSfkpfArikE71unJy0LPmlhpM" />
 
         <activity
             android:name=".Login.LoginActivity"

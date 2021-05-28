@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.ajou.ourvillage.R;
@@ -29,6 +30,7 @@ public class TastyFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private FirebaseUser firebaseUser;
+    private Button btn_test;
 
     public TastyFragment() {
         // Required empty public constructor
@@ -51,6 +53,15 @@ public class TastyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TastyWriteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_test = view.findViewById(R.id.tast_btn_test);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TastyMapActivity.class);
                 startActivity(intent);
             }
         });
