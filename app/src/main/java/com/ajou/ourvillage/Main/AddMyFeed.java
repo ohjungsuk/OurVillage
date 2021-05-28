@@ -55,7 +55,7 @@ public class AddMyFeed extends AppCompatActivity implements ImageInterface {
 
     long mNow;
     Date mDate;
-    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private LinearLayout image_layout;
     private ImageView imageView;
     private ImageButton btn_backToMain,imgbtn_upload;
@@ -140,7 +140,7 @@ public class AddMyFeed extends AppCompatActivity implements ImageInterface {
             for (UserInfo profile : firebaseUser.getProviderData()) {
                 name = profile.getDisplayName();
             }                                                                   //mImgUri.toString(),
-            WriteFeedInfo writeFeedInfo = new WriteFeedInfo(name, getTime(), title, mImgUri.toString(), content, "5", "3");
+            WriteFeedInfo writeFeedInfo = new WriteFeedInfo(name, getTime(), title, mImgUri.toString(), content, "0", "0");
             uploadToDB(writeFeedInfo);
         }
     }

@@ -39,6 +39,8 @@
         android:layout_marginHorizontal="20dp"
         android:singleLine="true"
         android:textSize="25sp"
+        android:textColor="@color/black"
+
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:hint="아이디" />
 
@@ -64,6 +66,8 @@
         android:layout_marginHorizontal="20dp"
         android:inputType="textPassword"
         android:textSize="25sp"
+        android:textColor="@color/black"
+
         app:passwordToggleEnabled="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:hint="비밀번호" />

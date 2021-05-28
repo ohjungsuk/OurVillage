@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Friend.ShowAllUsers"></activity>
         <activity
             android:name=".Tasty.TastyWriteActivity"
             android:theme="@style/Theme.Design.NoActionBar" />

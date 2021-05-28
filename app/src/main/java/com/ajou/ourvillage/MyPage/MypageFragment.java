@@ -27,13 +27,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class MypageFragment extends Fragment {
 
     private TextView mypage_email, mypage_Nickname;
     private Button mypage_add_post, mypage_modify_pw, mypage_cancel1, mypage_cancel2,mypage_NameModify,
             mypage_btn_MyGoodPost, mypage_MyCommentPost, mypage_MyPost, mypage_EmailAuth;
-    private ImageButton mypage_imgbtn_profile;
+    private CircleImageView mypage_imgbtn_profile;
     private LinearLayout mypage_linear_modify;
     private EditText mypage_edt_name, mypage_edt_PwChange_byEmail;
 

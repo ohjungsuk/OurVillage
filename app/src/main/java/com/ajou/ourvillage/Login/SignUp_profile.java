@@ -109,7 +109,7 @@ public class SignUp_profile extends AppCompatActivity {
                 MemberInfo memberinfo = new MemberInfo(nickname, name, phone_num, address, apart);
                 for (UserInfo profile : firebaseUser.getProviderData()) {
                     String db_email = profile.getEmail();
-                    db.collection(db_email).document(firebaseUser.getUid()).set(memberinfo)
+                    db.collection("users").document(db_email).set(memberinfo)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

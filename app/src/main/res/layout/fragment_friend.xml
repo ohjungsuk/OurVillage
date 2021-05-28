@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:background="@android:color/white"
     android:id="@+id/post_root"
-    tools:context=".MainActivity">
+    tools:context=".Community.CommunityFragment">
 
     <LinearLayout
         android:descendantFocusability="blocksDescendants"
@@ -26,35 +26,8 @@
                 android:textSize="24sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/black"
-                android:text="메인 피드"
-                tools:text="메인 피드" />
-
-            <TextView
-                android:id="@+id/main_btn_searchFriend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="80dp"
-                android:layout_centerVertical="true"
-                android:background="#00FFFFFF"
-                android:textColor="@color/ourvillage_main"
-                android:textSize="20sp"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="친구추가" />
-
-            <TextView
-                android:id="@+id/main_btn_write"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="#00FFFFFF"
-                android:textColor="@color/ourvillage_main"
-                android:textSize="20sp"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="글쓰기" />
+                android:text="내친구들"
+                tools:text="내친구들" />
 
         </RelativeLayout>
 
@@ -66,7 +39,7 @@
             android:background="#F1F2F4"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_recyclerview"
+            android:id="@+id/friend_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"
