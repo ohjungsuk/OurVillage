@@ -93,7 +93,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:text="게시물 추가"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 android:padding="10dp"/>
             <Button
@@ -106,8 +106,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
-                android:text="회원정보 수정 "
-                android:textColor="@color/black"
+                android:text="회원정보 수정"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 android:padding="10dp"/>
             <Button
@@ -121,7 +121,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:text="내 지역 설정"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 android:padding="10dp"/>
         </LinearLayout>
@@ -194,7 +194,7 @@
                     android:textSize="12sp"
                     android:gravity="center"
                     android:background="@drawable/rounding_btn"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
                 <Button
                     android:id="@+id/mypage_cancel1"
                     android:layout_marginTop="10dp"
@@ -205,9 +205,8 @@
                     android:text="닫기"
                     android:textSize="12sp"
                     android:gravity="center"
-
                     android:background="@drawable/rounding_btn"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
             </LinearLayout>
 
             <View
@@ -272,7 +271,7 @@
                     android:gravity="center"
                     android:textSize="12sp"
                     android:background="@drawable/rounding_btn"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
                 <Button
                     android:gravity="center"
                     android:id="@+id/mypage_cancel2"
@@ -284,7 +283,7 @@
                     android:text="닫기"
                     android:textSize="12sp"
                     android:background="@drawable/rounding_btn"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -332,6 +331,37 @@
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/white"
                 android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@android:color/white"
+            android:layout_marginVertical="10dp"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/mypage_btn_logout"
+                android:layout_marginEnd="5dp"
+                android:padding="15dp"
+                android:background="@drawable/rounding_btn"
+                android:layout_width="150dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="로그아웃"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/mypage_btn_signout"
+                android:layout_marginStart="5dp"
+                android:padding="15dp"
+                android:background="@drawable/rounding_btn"
+                android:layout_width="150dp"
+                android:text="회원탈퇴"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

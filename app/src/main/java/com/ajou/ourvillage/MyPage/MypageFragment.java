@@ -1,10 +1,13 @@
 package com.ajou.ourvillage.MyPage;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.Login.LoginActivity;
+import com.ajou.ourvillage.Main.MainFragment;
 import com.ajou.ourvillage.MainActivity;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,9 +36,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MypageFragment extends Fragment {
 
+    private FirebaseUser firebaseUser;
     private TextView mypage_email, mypage_Nickname;
     private Button mypage_add_post, mypage_modify_pw, mypage_cancel1, mypage_cancel2,mypage_NameModify,
             mypage_btn_MyGoodPost, mypage_MyCommentPost, mypage_MyPost, mypage_EmailAuth;
+    private Button mypage_btn_logout, mypage_btn_signout;
     private CircleImageView mypage_imgbtn_profile;
     private LinearLayout mypage_linear_modify;
     private EditText mypage_edt_name, mypage_edt_PwChange_byEmail;
@@ -50,6 +56,8 @@ public class MypageFragment extends Fragment {
         mypage_cancel2 = (Button) v.findViewById(R.id.mypage_cancel2);
         mypage_edt_name = (EditText) v.findViewById(R.id.mypage_edt_name);
         mypage_edt_PwChange_byEmail= (EditText) v.findViewById(R.id.mypage_edt_PwChange_byEmail);
+        mypage_btn_logout = (Button) v.findViewById(R.id.mypage_btn_logout);
+        mypage_btn_signout = (Button) v.findViewById(R.id.mypage_btn_signout);
     }
 
     private FirebaseAuth firebaseAuth;
@@ -147,6 +155,37 @@ public class MypageFragment extends Fragment {
                 }
             }
         });
+
+        mypage_btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getActivity())
+                        .setMessage("로그아웃을 하시겠습니까?")
+                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                firebaseAuth.signOut();
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        }).show();
+
+            }
+        });
+
+        mypage_btn_signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
 
         return view;
     }

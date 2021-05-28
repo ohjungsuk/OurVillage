@@ -33,11 +33,11 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
                 ApartFragment apartFragment = new ApartFragment();
                 return apartFragment;
             case 2:
-                FriendFragment friendFragment = new FriendFragment();
-                return friendFragment;
-            case 3:
                 TastyFragment tastyFragment = new TastyFragment();
                 return tastyFragment;
+            case 3:
+                FriendFragment friendFragment = new FriendFragment();
+                return friendFragment;
             case 4:
                 MypageFragment mypageFragment = new MypageFragment();
                 return mypageFragment;

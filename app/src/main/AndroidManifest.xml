@@ -10,30 +10,36 @@
     <application
         android:name=".kakaoApi"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_appmain"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_appmain_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OurVillage"
         android:usesCleartextTraffic="true">
         <activity android:name=".Friend.ShowAllUsers"></activity>
         <activity
             android:name=".Tasty.TastyWriteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Community.CommunityWriteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Apart.WriteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Login.SignUpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Login.SignUp_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Main.AddMyFeed"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
 
         <meta-data
@@ -42,6 +48,7 @@
 
         <activity
             android:name=".Login.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,6 +58,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 

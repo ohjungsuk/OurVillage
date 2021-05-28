@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OurVillage</string>
+    <string name="app_name">울동네</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kakao_app_key">3a04aca0fa5206edfe54218641b30993</string>
