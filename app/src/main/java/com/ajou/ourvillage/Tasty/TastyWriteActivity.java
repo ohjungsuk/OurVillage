@@ -20,9 +20,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.ajou.ourvillage.Apart.ApartImageService;
-import com.ajou.ourvillage.Apart.ApartWriteActivity;
-import com.ajou.ourvillage.Main.WriteFeedInfo;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

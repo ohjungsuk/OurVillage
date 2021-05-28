@@ -2,7 +2,7 @@ package com.ajou.ourvillage.Apart;
 
 import android.net.Uri;
 
-public interface ApartImageInterface {
+public interface ImageInterface {
     void uploadFireBaseSuccess(Uri uri);
 
     void uploadFireBaseFailure();

@@ -16,14 +16,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class ApartImageService {
-    private final ApartImageInterface mApartImageInterface;
+    private final ImageInterface mImageInterface;
 
-    public ApartImageService(ApartImageInterface mApartImageInterface) {
-        this.mApartImageInterface = mApartImageInterface;
+    public ApartImageService(ImageInterface mImageInterface) {
+        this.mImageInterface = mImageInterface;
     }
 
     public void uploadFileToFireBase(Uri imgUri) {
-        final ProgressDialog progressDialog = new ProgressDialog((ApartWriteActivity) mApartImageInterface);
+        final ProgressDialog progressDialog = new ProgressDialog((WriteActivity) mImageInterface);
         progressDialog.setTitle("Uploading..");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
@@ -46,7 +46,7 @@ public class ApartImageService {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        mApartImageInterface.uploadFireBaseFailure();
+                        mImageInterface.uploadFireBaseFailure();
                     }
                 })
                 //진행중
@@ -72,10 +72,10 @@ public class ApartImageService {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();  // downloadUri -> 이게 업로드 완료된  url임
                     progressDialog.dismiss();
-                    mApartImageInterface.uploadFireBaseSuccess(downloadUri);
+                    mImageInterface.uploadFireBaseSuccess(downloadUri);
                 } else {
                     progressDialog.dismiss();
-                    mApartImageInterface.uploadFireBaseFailure();
+                    mImageInterface.uploadFireBaseFailure();
                 }
             }
         });

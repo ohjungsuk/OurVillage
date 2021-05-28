@@ -23,7 +23,7 @@
             android:name=".Community.CommunityWriteActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Apart.ApartWriteActivity"
+            android:name=".Apart.WriteActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Login.SignUpActivity"
@@ -33,9 +33,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Main.AddMyFeed"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Main.GalleryAcitivity"
             android:theme="@style/Theme.Design.NoActionBar" />
 
         <meta-data

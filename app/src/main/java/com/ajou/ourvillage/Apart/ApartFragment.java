@@ -39,7 +39,7 @@ public class ApartFragment extends Fragment {
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ApartWriteActivity.class);
+                Intent intent = new Intent(getActivity(), WriteActivity.class);
                 startActivity(intent);
             }
         });
