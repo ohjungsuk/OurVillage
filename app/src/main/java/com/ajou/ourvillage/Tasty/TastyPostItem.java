@@ -9,8 +9,9 @@ public class TastyPostItem {
     private String content; // 글 내용
     private String likeCnt; // 좋아요 갯수
     private String commentCount; // 댓글 갯수
+    private String location; // 주소
 
-    public TastyPostItem(String img_content, String writer, String date, String title, String content, String likeCnt, String commentCount) {
+    public TastyPostItem(String img_content, String writer, String date, String title, String content, String likeCnt, String commentCount, String location) {
 //        this.img_profile = img_profile;
         this.img_content = img_content;
         this.writer = writer;
@@ -19,6 +20,7 @@ public class TastyPostItem {
         this.content = content;
         this.likeCnt = likeCnt;
         this.commentCount = commentCount;
+        this.location = location;
     }
 
 //    public String getImg_profile() {
@@ -85,4 +87,11 @@ public class TastyPostItem {
         this.commentCount = commentCount;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

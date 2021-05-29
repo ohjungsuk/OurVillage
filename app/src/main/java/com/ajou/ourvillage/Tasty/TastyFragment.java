@@ -3,7 +3,6 @@ package com.ajou.ourvillage.Tasty;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.ajou.ourvillage.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -61,7 +59,7 @@ public class TastyFragment extends Fragment {
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TastyMapActivity.class);
+                Intent intent = new Intent(getActivity(), TastyShowMapActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +81,7 @@ public class TastyFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         for (int i = 0; i < 10; i++) {
-            dataList.add(new TastyPostItem("이미지프로", "이", "시간", "제", "내용", "0", "0"));
+            dataList.add(new TastyPostItem("dd", "이", "시간", "제", "내용", "0", "0", "주소"));
         }
 
         TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);

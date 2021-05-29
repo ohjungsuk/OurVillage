@@ -42,6 +42,7 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
         holder.tv_date.setText(item.getDate());
         holder.tv_likecnt.setText(item.getLikeCnt());
         holder.tv_commentcnt.setText(item.getCommentCount());
+        //holder.tv_location.setText(item.getLocation());
     }
 
     @Override
@@ -51,7 +52,7 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_profile, img_content;
-        TextView tv_writer, tv_title, tv_content, tv_date, tv_likecnt, tv_commentcnt;
+        TextView tv_writer, tv_title, tv_content, tv_date, tv_likecnt, tv_commentcnt, tv_location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +65,7 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
             tv_date = itemView.findViewById(R.id.post_tv_date);
             tv_likecnt = itemView.findViewById(R.id.post_tv_like_count);
             tv_commentcnt = itemView.findViewById(R.id.post_tv_commentcount);
+            tv_location = itemView.findViewById(R.id.tasty_tv_showlocation);
         }
     }
 

@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class TastyMapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class TastyShowMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapView mapView = null;
     private GoogleMap mMap;
@@ -31,7 +31,7 @@ public class TastyMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tasty_map);
+        setContentView(R.layout.activity_tasty_show_map);
 
         // SupportMapFragment을 통해 레이아웃에 만든 fragment의 ID를 참조하고 구글맵을 호출한다.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
