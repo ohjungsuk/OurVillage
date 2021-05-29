@@ -19,7 +19,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="5dp"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:titleTextColor="@android:color/black"
+        app:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 
@@ -40,7 +40,7 @@
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:gravity="right|center_vertical"
-                android:text="Email : "
+                android:text="이메일"
                 android:textColor="@color/theme"
                 android:textSize="18sp" />
             <EditText
@@ -49,10 +49,11 @@
                 android:maxLength="30"
                 android:singleLine="true"
                 android:scrollHorizontally="false"
+                android:layout_marginStart="15dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                android:hint="Enter Your Email"
+                android:hint="이메일을 입력해주세요."
                 android:backgroundTint="@color/theme"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -70,20 +71,21 @@
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:gravity="right|center_vertical"
-                android:text="PW : "
+                android:text="비밀번호"
                 android:textColor="@color/theme"
                 android:textSize="18sp" />
             <EditText
                 android:id="@+id/signUP_edt_pw"
+                android:layout_marginStart="15dp"
                 android:layout_marginEnd="20dp"
                 android:maxLength="30"
                 android:singleLine="true"
                 android:scrollHorizontally="false"
                 android:textSize="16sp"
-                android:hint="Enter Your Password"
+                android:hint="비밀번호를 입력해주세요."
                 android:backgroundTint="@color/theme"
                 android:textColor="@color/black"
-
+                android:inputType="textPassword"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
@@ -107,27 +109,21 @@
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:gravity="right|center_vertical"
-                    android:text="PW : "
-                    android:textColor="@color/theme"
-                    android:textSize="18sp" />
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="Check"
+                    android:text="비밀번호 확인"
                     android:textColor="@color/theme"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <EditText
                 android:id="@+id/sinUp_edt_pwCheck"
+                android:layout_marginStart="15dp"
                 android:layout_marginEnd="20dp"
                 android:maxLength="30"
                 android:singleLine="true"
                 android:scrollHorizontally="false"
                 android:textSize="16sp"
-                android:hint="ReEnter Your Password"
+                android:inputType="textPassword"
+                android:hint="비밀번호를 다시 한번 입력해주세요."
                 android:backgroundTint="@color/theme"
                 android:layout_weight="1"
                 android:layout_width="0dp"

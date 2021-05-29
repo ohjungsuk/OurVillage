@@ -98,7 +98,7 @@ public class MainFragment extends Fragment {
                                                         for (UserInfo profile : firebaseUser.getProviderData()) {
                                                             m_nickname = profile.getDisplayName();
                                                         }//|| document.getData().get("writer").toString().equals(m_nickname)
-                                                        if(document.getData().get("writer").toString().equals(documentSnapshot.getData().get("nickname").toString())){
+                                                        if (document.getData().get("writer").toString().equals(documentSnapshot.getData().get("nickname").toString())){
                                                             dataList.add(new WriteFeedInfo(
                                                                     document.getData().get("writer").toString(),
                                                                     document.getData().get("date").toString(),

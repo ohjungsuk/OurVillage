@@ -44,6 +44,13 @@
 
         </RelativeLayout>
 
+        <Button
+            android:id="@+id/tast_btn_test"
+            android:textColor="@color/white"
+            android:background="@drawable/rounding_btn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="test" />
 
         <View
             android:layout_marginHorizontal="15dp"

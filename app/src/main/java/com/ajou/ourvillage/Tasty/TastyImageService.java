@@ -5,8 +5,6 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import com.ajou.ourvillage.Community.CommunityImageInterface;
-import com.ajou.ourvillage.Community.CommunityWriteActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

@@ -72,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
         //HashKey();
         //out();
 
+        toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         toolbar.setNavigationOnClickListener(view -> {
 
         });
@@ -92,75 +95,75 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        main_btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(MainActivity.this)
-                        .setMessage("로그아웃을 하시겠습니까?")
-                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                firebaseAuth.signOut();
-                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).show();
-
-            }
-        });
-
-        main_btn_signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(MainActivity.this)
-                        .setMessage("정말 계정을 삭제할까요?")
-                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                                firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        for (UserInfo profile : firebaseUser.getProviderData()) {
-                                            if(activity_stack_check){
-                                                db = FirebaseFirestore.getInstance();
-                                                String db_email = profile.getEmail();
-                                                db.collection(db_email).document(firebaseUser.getUid()).delete();
-                                                firebaseAuth.signOut();
-                                                firebaseUser.delete();
-                                                Toast.makeText(getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                                startActivity(intent);
-                                                activity_stack_check =false;
-                                                finish();
-                                                dialogInterface.dismiss();
-                                            }
-                                        }
-                                    }
-                                });
-
-                            }
-                        })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).show();
-            }
-        });
+//        main_btn_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new AlertDialog.Builder(MainActivity.this)
+//                        .setMessage("로그아웃을 하시겠습니까?")
+//                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                firebaseAuth.signOut();
+//                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        })
+//                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        }).show();
+//
+//            }
+//        });
+//
+//        main_btn_signout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new AlertDialog.Builder(MainActivity.this)
+//                        .setMessage("정말 계정을 삭제할까요?")
+//                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//                                firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<Void> task) {
+//                                        for (UserInfo profile : firebaseUser.getProviderData()) {
+//                                            if(activity_stack_check){
+//                                                db = FirebaseFirestore.getInstance();
+//                                                String db_email = profile.getEmail();
+//                                                db.collection(db_email).document(firebaseUser.getUid()).delete();
+//                                                firebaseAuth.signOut();
+//                                                firebaseUser.delete();
+//                                                Toast.makeText(getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
+//                                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                                                startActivity(intent);
+//                                                activity_stack_check =false;
+//                                                finish();
+//                                                dialogInterface.dismiss();
+//                                            }
+//                                        }
+//                                    }
+//                                });
+//
+//                            }
+//                        })
+//                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        }).show();
+//            }
+//        });
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_main));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_apartment));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_post));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_tasty));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_friend));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -173,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         // PageChangeListener 생성
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         // 최초로 앱 실행 시 홈화면이 뜨기 때문에, 홈 아이콘은 초기 아이콘 색상을 검은색으로 설정
-        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+        tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.theme), PorterDuff.Mode.SRC_IN);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -183,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < 5; i++) {
                     if (tab.getPosition() == i) {
                         // 탭이 선택되었을 경우, 아이콘 색상은 검은색
-                        tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+                        tabLayout.getTabAt(i).getIcon().setColorFilter(getResources().getColor(R.color.theme), PorterDuff.Mode.SRC_IN);
                     }
                 }
             }
@@ -207,8 +210,8 @@ public class MainActivity extends AppCompatActivity {
         coordinatorLayout = findViewById(R.id.root);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         tabLayout = (TabLayout) findViewById(R.id.main_tabs);
-        main_btn_logout = (Button)findViewById(R.id.main_btn_logout);
-        main_btn_signout = (Button)findViewById(R.id.main_btn_signout);
+//        main_btn_logout = (Button)findViewById(R.id.main_btn_logout);
+//        main_btn_signout = (Button)findViewById(R.id.main_btn_signout);
     }
 
     public void out(){  //카카오용

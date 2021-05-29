@@ -10,10 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.ajou.ourvillage.Apart.WriteActivity;
 import com.ajou.ourvillage.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -21,6 +25,10 @@ import java.util.ArrayList;
 public class TastyFragment extends Fragment {
 
     private TextView btn_write;
+    private FirebaseFirestore db;
+    private FirebaseStorage storage;
+    private FirebaseUser firebaseUser;
+    private Button btn_test;
 
     public TastyFragment() {
         // Required empty public constructor
@@ -42,7 +50,16 @@ public class TastyFragment extends Fragment {
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), WriteActivity.class);
+                Intent intent = new Intent(getActivity(), TastyWriteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_test = view.findViewById(R.id.tast_btn_test);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TastyShowMapActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,17 +71,22 @@ public class TastyFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        ArrayList<TastyPostItem> dataList = new ArrayList<>();
+
+        db = FirebaseFirestore.getInstance();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         RecyclerView recyclerView = getActivity().findViewById(R.id.tasty_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<TastyPostItem> dataList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            dataList.add(new TastyPostItem(R.drawable.ic_launcher_background, "이름임", "2021년 5월 3일 월요일", "맛집 찾음", "요 앞에 새로 생긴 곳 마싯더라구영", "5", "3", false));
+            dataList.add(new TastyPostItem("dd", "이", "시간", "제", "내용", "0", "0", "주소"));
         }
 
         TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);
         recyclerView.setAdapter(tastyPostAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
+
     }
 }

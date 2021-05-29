@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.R;
@@ -25,20 +27,34 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class TastyWriteActivity extends AppCompatActivity implements TastyImageInterface{
 
     private static final String TAG = "TastyWrite";
+    static String tasty_location;
+    private TextView tv_set_location;
 
+    private GpsTracker gpsTracker;
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
+    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private ImageButton btn_backToMain;
     private ImageView img_upload;
-    private Button btn_tasty_write;
+    private Button btn_tasty_write, btn_tasty_add_location;
     private EditText et_tasty_content, et_tasty_title;
     private FirebaseFirestore db;
     private FirebaseUser firebaseUser;
@@ -64,6 +80,8 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
         btn_backToMain = (ImageButton) findViewById(R.id.tasty_write_btn_close);
         img_upload = (ImageView) findViewById(R.id.tasty_write_btn_img);
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+        btn_tasty_add_location = (Button) findViewById(R.id.tasty_btn_add_map);
+        tv_set_location = (TextView) findViewById(R.id.tasty_tv_location);
     }
 
     public void btnMover(){
@@ -71,7 +89,7 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(TastyWriteActivity.this)
-                        .setMessage("뒤로가시면 내용이 저장되지 않습니다.")
+                        .setMessage("뒤로 가시면 내용이 저장되지 않습니다.")
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -100,18 +118,43 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
                 startActivityForResult(intent, REQUEST_IMAGE_CODE);
             }
         });
+
+        btn_tasty_add_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TastyChooseMapActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void post(){
         final String title = et_tasty_title.getText().toString();
         final String content = et_tasty_content.getText().toString();
+        final String location = tv_set_location.getText().toString();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(title.length() > 0 && content.length() > 0){
-            TastyPostItem tastyPostItem = new TastyPostItem(R.drawable.ic_launcher_background, firebaseUser.getEmail(), "2021.05.23.Sun 08:24", title, content, "5", "3", false);
+            ArrayList<String> contentsList = new ArrayList<>();
+            if(content.length() > 0){
+                contentsList.add(content);
+            }
+            String name = null;
+            for (UserInfo profile : firebaseUser.getProviderData()) {
+                name = profile.getDisplayName();
+            }
+            System.out.println("위치" + location);
+            TastyPostItem tastyPostItem = new TastyPostItem(mImgUri.toString(), name, getTime(), title, content, "0", "0", location);
             uploadToDB(tastyPostItem);
         }
     }
+
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
+
     private void uploadToDB(TastyPostItem tastyPostItem){
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -179,5 +222,12 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
     @Override
     public void uploadFireBaseFailure() {
         Toast.makeText(getApplicationContext(), "firebase upload fail ", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        tv_set_location.setText(tasty_location);
     }
 }
