@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AllUsersAdapter extends RecyclerView.Adapter<AllUsersAdapter.ViewHolder> implements OnUserItemClickListener{
-    private ArrayList<UserListInfo> mDataList;
+    private ArrayList<FriendListInfo> mDataList;
     OnUserItemClickListener listener;
 
-    public AllUsersAdapter(ArrayList<UserListInfo> mDataList) {
+    public AllUsersAdapter(ArrayList<FriendListInfo> mDataList) {
         this.mDataList = mDataList;
     }
 
@@ -32,7 +32,7 @@ public class AllUsersAdapter extends RecyclerView.Adapter<AllUsersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull AllUsersAdapter.ViewHolder holder, int position) {
-        UserListInfo item = mDataList.get(position);
+        FriendListInfo item = mDataList.get(position);
         holder.setItem(item);
 
         //holder.friend_img_profile.setImageResource(item.getFriend_img_profile());
@@ -78,22 +78,22 @@ public class AllUsersAdapter extends RecyclerView.Adapter<AllUsersAdapter.ViewHo
                 }
             });
         }
-        public void setItem(UserListInfo item){
-            friend_nickname.setText(item.getNickname());
+        public void setItem(FriendListInfo item){
+            friend_nickname.setText(item.getMy_nickname());
             friend_address.setText(item.getAddress());
         }
 
     }
-    public void addItem(UserListInfo item){
+    public void addItem(FriendListInfo item){
         mDataList.add(item);
     }
-    public void setItems(ArrayList<UserListInfo> mDataList){
+    public void setItems(ArrayList<FriendListInfo> mDataList){
         this.mDataList = mDataList;
     }
-    public UserListInfo getItem(int position){
+    public FriendListInfo getItem(int position){
         return mDataList.get(position);
     }
-    public void setItem(int position, UserListInfo item){
+    public void setItem(int position, FriendListInfo item){
         mDataList.set(position,item);
     }
 

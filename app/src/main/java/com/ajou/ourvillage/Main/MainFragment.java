@@ -38,6 +38,9 @@ public class MainFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private FirebaseUser firebaseUser;
+    private String mf_nickname = null;
+    private boolean is_upload = false;
+    private int cnt_upload = 0;
 
     public MainFragment() {
         // Required empty public constructor
@@ -74,54 +77,71 @@ public class MainFragment extends Fragment {
         super.onResume();
 
         ArrayList<WriteFeedInfo> dataList = new ArrayList<>();
-
+        is_upload = false;
 
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("Feed")
+        db.collection("friends")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //    WriteFeedInfo writeFeedInfo = document.getData().get(WriteFeedInfo.class);
-
-                                db.collection("friends")
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if(task.isSuccessful()){
-                                                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                                        String m_nickname = null;
-                                                        for (UserInfo profile : firebaseUser.getProviderData()) {
-                                                            m_nickname = profile.getDisplayName();
-                                                        }//|| document.getData().get("writer").toString().equals(m_nickname)
-                                                        if (document.getData().get("writer").toString().equals(documentSnapshot.getData().get("nickname").toString())){
-                                                            dataList.add(new WriteFeedInfo(
-                                                                    document.getData().get("writer").toString(),
-                                                                    document.getData().get("date").toString(),
-                                                                    document.getData().get("title").toString(),
-                                                                    document.getData().get("img_profile").toString(),
-                                                                    document.getData().get("content").toString(),
-                                                                    document.getData().get("likeCnt").toString(),
-                                                                    document.getData().get("commentCount").toString()
-                                                            ));
+                            for (QueryDocumentSnapshot friendsfile : task.getResult()) {
+                                Log.d("test", "point2");
+                                for (UserInfo profile : firebaseUser.getProviderData()) {
+                                    mf_nickname = profile.getDisplayName();
+                                }
+                                if(mf_nickname.equals(friendsfile.getData().get("my_nickname").toString())){
+                                    Log.d("test", mf_nickname);
+                                    db.collection("Feed")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        for (QueryDocumentSnapshot feedfile : task.getResult()) {
+                                                            if(friendsfile.getData().get("friend_nickname").equals(feedfile.getData().get("writer").toString())){
+                                                                dataList.add(new WriteFeedInfo(
+                                                                        feedfile.getData().get("writer").toString(),
+                                                                        feedfile.getData().get("date").toString(),
+                                                                        feedfile.getData().get("title").toString(),
+                                                                        feedfile.getData().get("img_profile").toString(),
+                                                                        feedfile.getData().get("content").toString(),
+                                                                        feedfile.getData().get("likeCnt").toString(),
+                                                                        feedfile.getData().get("commentCount").toString()
+                                                                ));
+                                                            }
+                                                            if(mf_nickname.equals(feedfile.getData().get("writer").toString())){
+                                                                if(!is_upload){
+                                                                    dataList.add(new WriteFeedInfo(
+                                                                            feedfile.getData().get("writer").toString(),
+                                                                            feedfile.getData().get("date").toString(),
+                                                                            feedfile.getData().get("title").toString(),
+                                                                            feedfile.getData().get("img_profile").toString(),
+                                                                            feedfile.getData().get("content").toString(),
+                                                                            feedfile.getData().get("likeCnt").toString(),
+                                                                            feedfile.getData().get("commentCount").toString()
+                                                                    ));
+                                                                    is_upload =true;
+                                                                }
+                                                                cnt_upload ++;
+                                                            }
                                                         }
-                                                        Log.d(TAG, document.getId() + " => " + document.getData());
-                                                    }
-                                                    RecyclerView recyclerView = getActivity().findViewById(R.id.main_recyclerview);
-                                                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                                                    recyclerView.setLayoutManager(layoutManager);
+                                                        RecyclerView recyclerView = getActivity().findViewById(R.id.main_recyclerview);
+                                                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                                                        recyclerView.setLayoutManager(layoutManager);
 
-                                                    MainPostAdapter mainPostAdapter = new MainPostAdapter(dataList);
-                                                    recyclerView.setAdapter(mainPostAdapter);
-                                                    recyclerView.getAdapter().notifyDataSetChanged();
+                                                        MainPostAdapter mainPostAdapter = new MainPostAdapter(dataList);
+                                                        recyclerView.setAdapter(mainPostAdapter);
+                                                        recyclerView.getAdapter().notifyDataSetChanged();
+                                                    }
                                                 }
-                                            }
-                                        });
+                                            });
+                                }
+
                             }
+                            Log.d("myfeedcheck", String.valueOf(cnt_upload));
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }

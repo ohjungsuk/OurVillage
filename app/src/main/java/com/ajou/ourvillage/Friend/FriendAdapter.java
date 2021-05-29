@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder> {
-    private final ArrayList<UserListInfo> mDataList;
+    private final ArrayList<FriendListInfo> mDataList;
 
-    public FriendAdapter(ArrayList<UserListInfo> mDataList) {
+    public FriendAdapter(ArrayList<FriendListInfo> mDataList) {
         this.mDataList = mDataList;
     }
 
@@ -31,11 +31,11 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FriendAdapter.ViewHolder holder, int position) {
-        UserListInfo item = mDataList.get(position);
+        FriendListInfo item = mDataList.get(position);
 
         //holder.friend_img_profile.setImageResource(item.getFriend_img_profile());
         holder.friend_address.setText(item.getAddress());
-        holder.friend_nickname.setText(item.getNickname());
+        holder.friend_nickname.setText(item.getFriend_nickname());
     }
 
     @Override
