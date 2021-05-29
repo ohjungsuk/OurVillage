@@ -24,14 +24,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.kakao.usermgmt.response.model.User;
 
 import java.util.ArrayList;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class ShowAllUsers extends AppCompatActivity {
-    private ArrayList<UserListInfo> friendlist;
+    private ArrayList<FriendListInfo> friendlist;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
@@ -59,7 +58,7 @@ public class ShowAllUsers extends AppCompatActivity {
 //        FriendAdapter friendAdapter = new FriendAdapter(dataList);
 //        recyclerView.setAdapter(friendAdapter);
 //        recyclerView.getAdapter().notifyDataSetChanged();
-        ArrayList<UserListInfo> dataList = new ArrayList<>();
+        ArrayList<FriendListInfo> dataList = new ArrayList<>();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -71,8 +70,9 @@ public class ShowAllUsers extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //    WriteFeedInfo writeFeedInfo = document.getData().get(WriteFeedInfo.class);
-                                dataList.add(new UserListInfo(
+                                dataList.add(new FriendListInfo(
                                         document.getData().get("nickname").toString(),
+                                        document.getData().get("friend_nickname").toString(),
                                         document.getData().get("address").toString()
                                 ));
                                 Log.d(TAG, document.getId() + " => " + document.getData());
@@ -87,38 +87,24 @@ public class ShowAllUsers extends AppCompatActivity {
                             allUsersAdapter.setOnItemClicklistener(new OnUserItemClickListener() {
                                 @Override
                                 public void onItemClick(AllUsersAdapter.ViewHolder holder, View view, int position) {
-                                    UserListInfo item = allUsersAdapter.getItem(position);
+                                    FriendListInfo item = allUsersAdapter.getItem(position);
                                     //Toast.makeText(getApplicationContext(),"아이템 선택 " + item.getNickname() + item.getAddress(), Toast.LENGTH_LONG).show();
                                     new AlertDialog.Builder(ShowAllUsers.this)
-                                            .setMessage(item.getNickname()+ "를(을) 친구추가 할까요?")
+                                            .setMessage(item.getMy_nickname()+ "를(을) 친구추가 할까요?")
                                             .setPositiveButton("네", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     dialogInterface.dismiss();
-//                                                    Intent intent = new Intent(getApplicationContext(), FriendFragment.class);
-//                                                    intent.putExtra("nickname", item.getNickname());
-//                                                    intent.putExtra("address", item.getAddress());
-//                                                    FriendFragment friendFragment = new FriendFragment();
-//
-//                                                    Bundle bundle = new Bundle(2);
-//                                                    bundle.putString("nname", item.getNickname());
-//                                                    bundle.putString("addre", item.getAddress());
-//                                                    friendFragment.setArguments(bundle);
 
                                                     String f_nickname = null;
-                                                    UserListInfo userListInfo = new UserListInfo(item.getNickname(),item.getAddress());
                                                     for (UserInfo profile : firebaseUser.getProviderData()) {
                                                         f_nickname = profile.getDisplayName();
-                                                    }
-//                                                    firebaseFirestore.collection("friends").document(f_nickname).set(userListInfo)
-//                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                                @Override
-//                                                                public void onSuccess(Void unused) {
-//                                                                    Toast.makeText(getApplicationContext(),"친구등록 성공1 " + item.getNickname() + item.getAddress(), Toast.LENGTH_LONG).show();
-//                                                                }
-//                                                            });
+                                                    }                                                    //paul
+                                                    FriendListInfo friendListInfo = new FriendListInfo(f_nickname,item.getMy_nickname(),item.getAddress());
+
+
                                                     firebaseFirestore.collection("friends")
-                                                            .add(userListInfo)
+                                                            .add(friendListInfo)
                                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                                 @Override
                                                                 public void onSuccess(DocumentReference documentReference) {

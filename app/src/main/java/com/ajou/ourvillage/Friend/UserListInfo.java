@@ -19,6 +19,7 @@ public class UserListInfo {
 //        this.friend_img_profile = friend_img_profile;
 //    }
 
+
     public String getNickname() {
         return nickname;
     }

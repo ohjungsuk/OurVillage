@@ -2,13 +2,15 @@ package com.ajou.ourvillage;
 
 public class MemberInfo {
     private String nickname;
+    private String friend_nickname;
     private String name;
     private String phone_num;
     private String address;
     private String apart;
 
-    public MemberInfo(String nickname, String name, String phone_num, String address, String apart) {
+    public MemberInfo(String nickname,String friend_nickname, String name, String phone_num, String address, String apart) {
         this.nickname = nickname;
+        this.friend_nickname = friend_nickname;
         this.name = name;
         this.phone_num = phone_num;
         this.address = address;
@@ -53,5 +55,13 @@ public class MemberInfo {
 
     public void setApart(String apart) {
         this.apart = apart;
+    }
+
+    public String getFriend_nickname() {
+        return friend_nickname;
+    }
+
+    public void setFriend_nickname(String friend_nickname) {
+        this.friend_nickname = friend_nickname;
     }
 }

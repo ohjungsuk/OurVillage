@@ -122,41 +122,7 @@ public class MainActivity extends AppCompatActivity {
 //        main_btn_signout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                new AlertDialog.Builder(MainActivity.this)
-//                        .setMessage("정말 계정을 삭제할까요?")
-//                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//                                firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//                                        for (UserInfo profile : firebaseUser.getProviderData()) {
-//                                            if(activity_stack_check){
-//                                                db = FirebaseFirestore.getInstance();
-//                                                String db_email = profile.getEmail();
-//                                                db.collection(db_email).document(firebaseUser.getUid()).delete();
-//                                                firebaseAuth.signOut();
-//                                                firebaseUser.delete();
-//                                                Toast.makeText(getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
-//                                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                                                startActivity(intent);
-//                                                activity_stack_check =false;
-//                                                finish();
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        }
-//                                    }
-//                                });
 //
-//                            }
-//                        })
-//                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.dismiss();
-//                            }
-//                        }).show();
 //            }
 //        });
 

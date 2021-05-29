@@ -99,6 +99,7 @@ public class SignUp_profile extends AppCompatActivity {
         String phone_num = signUP_edt_phoneNum.getText().toString();
         String address = signUP_edt_Address.getText().toString();
         String apart = signUP_edt_Apart.getText().toString();
+        String friend_nickname = "test";
 
 
         if(name.length() > 0 && nickname.length() >0 && phone_num.length() == 11 && address.length() > 0 && apart.length() > 0) {
@@ -106,7 +107,7 @@ public class SignUp_profile extends AppCompatActivity {
             db = FirebaseFirestore.getInstance();
 
             if (firebaseUser != null) {
-                MemberInfo memberinfo = new MemberInfo(nickname, name, phone_num, address, apart);
+                MemberInfo memberinfo = new MemberInfo(nickname, friend_nickname, name, phone_num, address, apart);
                 for (UserInfo profile : firebaseUser.getProviderData()) {
                     String db_email = profile.getEmail();
                     db.collection("users").document(db_email).set(memberinfo)
