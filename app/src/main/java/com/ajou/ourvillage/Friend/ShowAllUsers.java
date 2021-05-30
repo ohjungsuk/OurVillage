@@ -70,6 +70,7 @@ public class ShowAllUsers extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //    WriteFeedInfo writeFeedInfo = document.getData().get(WriteFeedInfo.class);
+
                                 dataList.add(new FriendListInfo(
                                         document.getData().get("nickname").toString(),
                                         document.getData().get("friend_nickname").toString(),
@@ -88,6 +89,7 @@ public class ShowAllUsers extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AllUsersAdapter.ViewHolder holder, View view, int position) {
                                     FriendListInfo item = allUsersAdapter.getItem(position);
+                                    Log.d("test2", String.valueOf(item));
                                     //Toast.makeText(getApplicationContext(),"아이템 선택 " + item.getNickname() + item.getAddress(), Toast.LENGTH_LONG).show();
                                     new AlertDialog.Builder(ShowAllUsers.this)
                                             .setMessage(item.getMy_nickname()+ "를(을) 친구추가 할까요?")
@@ -136,10 +138,5 @@ public class ShowAllUsers extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    public void addFriend(){
-
-
     }
 }

@@ -137,8 +137,10 @@ public class AddMyFeed extends AppCompatActivity implements ImageInterface {
                 contentsList.add(content);
             }
             String name = null;
+            String id = null;
             for (UserInfo profile : firebaseUser.getProviderData()) {
                 name = profile.getDisplayName();
+                id = profile.getUid();
             }                                                                   //mImgUri.toString(),
             WriteFeedInfo writeFeedInfo = new WriteFeedInfo(name, getTime(), title, mImgUri.toString(), content, "0", "0");
             uploadToDB(writeFeedInfo);

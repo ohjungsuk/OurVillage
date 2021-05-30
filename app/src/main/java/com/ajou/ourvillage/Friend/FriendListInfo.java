@@ -5,12 +5,21 @@ public class FriendListInfo {
     private String my_nickname;
     private String friend_nickname;
     private String address;
+    private String id;
 
     public FriendListInfo(String my_nickname, String friend_nickname, String address) {
         //this.friend_img_profile = friend_img_profile;
         this.my_nickname = my_nickname;
         this.friend_nickname = friend_nickname;
         this.address = address;
+    }
+
+    public FriendListInfo(String my_nickname, String friend_nickname, String address,String id) {
+        //this.friend_img_profile = friend_img_profile;
+        this.my_nickname = my_nickname;
+        this.friend_nickname = friend_nickname;
+        this.address = address;
+        this.id = id;
     }
 //
 //    public Integer getFriend_img_profile() {
@@ -44,5 +53,13 @@ public class FriendListInfo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

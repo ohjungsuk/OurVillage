@@ -8,7 +8,21 @@ public class WriteFeedInfo {
     private String content; // 글 내용
     private String likeCnt; // 좋아요 갯수
     private String commentCount; // 댓글 갯수
+    private String id;
     //private boolean like; // 좋아요 클릭 여부
+
+    public WriteFeedInfo( String writer, String date, String title, String img_profile, String content, String likeCnt, String commentCount,String id) {
+
+        this.writer = writer;
+        this.date = date;
+        this.title = title;
+        this.img_profile = img_profile;
+        this.content = content;
+        this.likeCnt = likeCnt;
+        this.commentCount = commentCount;
+        this.id= id;
+        //this.like = like;
+    }
 
     public WriteFeedInfo( String writer, String date, String title, String img_profile, String content, String likeCnt, String commentCount) {
 
@@ -78,7 +92,15 @@ public class WriteFeedInfo {
         this.commentCount = commentCount;
     }
 
-//    public boolean isLike() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //    public boolean isLike() {
 //        return like;
 //    }
 //

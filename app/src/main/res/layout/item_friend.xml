@@ -11,13 +11,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/friend_img_profile"
@@ -53,7 +52,23 @@
                     android:text="동탄주민" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/friend_tv_more"
+                android:visibility="visible"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="친구삭제"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_alignParentEnd="true"
+                app:tint="@android:color/darker_gray" />
+
         </RelativeLayout>
+
 
     </LinearLayout>
 </LinearLayout>
