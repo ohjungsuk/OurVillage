@@ -8,8 +8,10 @@ public class TastyPostItem {
     private String review; // 한줄평
     private String recommend; // 추천음식
     private String foodImage; // 음식 사진
+    private String latitude;
+    private String longitude;
 
-    public TastyPostItem(String writer, String date, String address, String rate, String review, String recommend, String foodImage) {
+    public TastyPostItem(String writer, String date, String address, String rate, String review, String recommend, String foodImage, String latitude, String longitude) {
         this.writer = writer;
         this.date = date;
         this.address = address;
@@ -17,6 +19,8 @@ public class TastyPostItem {
         this.review = review;
         this.recommend = recommend;
         this.foodImage = foodImage;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getWriter() {
@@ -73,5 +77,21 @@ public class TastyPostItem {
 
     public void setFoodImage(String foodImage) {
         this.foodImage = foodImage;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

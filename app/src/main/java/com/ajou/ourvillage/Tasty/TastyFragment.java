@@ -55,6 +55,15 @@ public class TastyFragment extends Fragment {
             }
         });
 
+        btn_test = view.findViewById(R.id.tast_btn_test);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TastyShowMapActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -72,7 +81,7 @@ public class TastyFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         for (int i = 0; i < 10; i++) {
-            dataList.add(new TastyPostItem("writer", "20210530", "seoul", "3", "맛잇당", "양념치킨", "ㅁㄴㅇ"));
+            dataList.add(new TastyPostItem("writer", "20210530", "seoul", "3", "맛잇당", "양념치킨", "ㅁㄴㅇ", "위도", "경도"));
         }
 
         TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);

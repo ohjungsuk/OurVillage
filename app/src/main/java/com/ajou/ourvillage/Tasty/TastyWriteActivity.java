@@ -43,6 +43,7 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
     private static final String TAG = "TastyWrite";
     static String tasty_location = "";
     private TextView tv_set_location;
+    static String address_longtitude, address_latitude;
 
     private GpsTracker gpsTracker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -176,7 +177,7 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
                 name = profile.getDisplayName();
             }
             System.out.println("위치" + location);
-            TastyPostItem tastyPostItem = new TastyPostItem(name, getTime(), location, score, review, recommend, mImgUri.toString());
+            TastyPostItem tastyPostItem = new TastyPostItem(name, getTime(), location, score, review, recommend, mImgUri.toString(), address_latitude, address_longtitude);
             uploadToDB(tastyPostItem);
         }
     }

@@ -30,6 +30,8 @@ import com.ajou.ourvillage.R;
 import com.google.android.gms.maps.MapView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import static com.ajou.ourvillage.Tasty.TastyWriteActivity.address_latitude;
+import static com.ajou.ourvillage.Tasty.TastyWriteActivity.address_longtitude;
 import static com.ajou.ourvillage.Tasty.TastyWriteActivity.tasty_location;
 
 public class TastyChooseMapActivity extends AppCompatActivity {
@@ -70,6 +72,9 @@ public class TastyChooseMapActivity extends AppCompatActivity {
                 tv_location.setText(address);
 
                 tasty_location = address;
+
+                address_latitude = String.valueOf(latitude);
+                address_longtitude = String.valueOf(longitude);
                 Toast.makeText(TastyChooseMapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
         });
