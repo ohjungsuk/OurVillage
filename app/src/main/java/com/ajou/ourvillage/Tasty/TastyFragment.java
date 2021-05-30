@@ -42,7 +42,6 @@ public class TastyFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private FirebaseUser firebaseUser;
-    private Button btn_test;
     private String mf_nickname = null;
     private boolean is_upload = false;
 
@@ -67,15 +66,6 @@ public class TastyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TastyWriteActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_test = view.findViewById(R.id.tast_btn_test);
-        btn_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TastyShowMapActivity.class);
                 startActivity(intent);
             }
         });
