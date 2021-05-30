@@ -81,7 +81,7 @@ public class TastyFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         for (int i = 0; i < 10; i++) {
-            dataList.add(new TastyPostItem("dd", "이", "시간", "제", "내용", "0", "0", "주소"));
+            dataList.add(new TastyPostItem("writer", "20210530", "seoul", "3", "맛잇당", "양념치킨", "ㅁㄴㅇ"));
         }
 
         TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);

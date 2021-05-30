@@ -55,7 +55,8 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
     private ImageButton btn_backToMain;
     private ImageView img_upload;
     private Button btn_tasty_write, btn_tasty_add_location;
-    private EditText et_tasty_content, et_tasty_title;
+    private TextView tv_tasty_score;
+    private EditText et_tasty_title, et_tasty_review, et_tasty_recommend;
     private FirebaseFirestore db;
     private FirebaseUser firebaseUser;
     private boolean activity_stack_check = true;
@@ -74,8 +75,10 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
     }
 
     public void init(){
-        et_tasty_content = (EditText)findViewById(R.id.tasty_write_et_content);
         et_tasty_title = (EditText)findViewById(R.id.tasty_write_et_title);
+        et_tasty_recommend = (EditText) findViewById(R.id.tasty_write_et_recommend);
+        et_tasty_review = (EditText) findViewById(R.id.tasty_write_et_review);
+        tv_tasty_score = (TextView) findViewById(R.id.tasty_tv_score);
         btn_tasty_write = (Button)findViewById(R.id.tasty_write_btn_complete);
         btn_backToMain = (ImageButton) findViewById(R.id.tasty_write_btn_close);
         img_upload = (ImageView) findViewById(R.id.tasty_write_btn_img);
@@ -126,25 +129,53 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
                 startActivity(intent);
             }
         });
+
+        tv_tasty_score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String[] items = new String[] {"★★★★★", "★★★★", "★★★", "★★", "★"};
+                final int[] selectedIndex = {0};
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(TastyWriteActivity.this);
+                dialog.setTitle("평점을 선택해주세요.")
+                        .setSingleChoiceItems(items,0
+                                ,new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        selectedIndex[0] = i;
+                                    }
+                                })
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                tv_tasty_score.setText(items[selectedIndex[0]]);
+
+                                System.out.println(items[selectedIndex[0]]);
+                            }
+                        }).create().show();
+            }
+        });
     }
 
     private void post(){
         final String title = et_tasty_title.getText().toString();
-        final String content = et_tasty_content.getText().toString();
+        final String review = et_tasty_review.getText().toString();
         final String location = tv_set_location.getText().toString();
+        final String score = tv_tasty_score.getText().toString();
+        final String recommend = et_tasty_recommend.getText().toString();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(title.length() > 0 && content.length() > 0){
+        if(title.length() > 0 && review.length() > 0){
             ArrayList<String> contentsList = new ArrayList<>();
-            if(content.length() > 0){
-                contentsList.add(content);
+            if(review.length() > 0){
+                contentsList.add(review);
             }
             String name = null;
             for (UserInfo profile : firebaseUser.getProviderData()) {
                 name = profile.getDisplayName();
             }
             System.out.println("위치" + location);
-            TastyPostItem tastyPostItem = new TastyPostItem(mImgUri.toString(), name, getTime(), title, content, "0", "0", location);
+            TastyPostItem tastyPostItem = new TastyPostItem(name, getTime(), location, score, review, recommend, mImgUri.toString());
             uploadToDB(tastyPostItem);
         }
     }
