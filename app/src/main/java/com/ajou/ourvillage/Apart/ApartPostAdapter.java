@@ -36,14 +36,6 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ApartPostItem item = mDataList.get(position);
 
-//        Glide.with(mContext).load(item.getImg_profile()).into(holder.img_profile);
-
-//        if (item.getImg_profile().equals("default")){
-//            holder.img_profile.setImageResource(R.mipmap.ic_launcher);
-//        } else {
-//            Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
-//        }
-//        holder.img_profile.setImageResource(item.getImg_profile());
         holder.tv_writer.setText(item.getWriter());
         holder.tv_title.setText(item.getTitle());
         holder.tv_content.setText(item.getContent());

@@ -1,5 +1,6 @@
 package com.ajou.ourvillage.Tasty;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.ViewHolder> {
 
     private final ArrayList<TastyPostItem> mDataList;
+    private Context mContext;
 
     public TastyPostAdapter(ArrayList<TastyPostItem> mDataList) {
         this.mDataList = mDataList;
@@ -41,6 +43,15 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
         holder.tv_review.setText(item.getReview());
         holder.tv_recommend.setText(item.getRecommend());
         Glide.with(holder.itemView).load(item.getFoodImage()).into(holder.img_content);
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mContext = view.getContext();
+//
+//
+//            }
+//        });
     }
 
     @Override
