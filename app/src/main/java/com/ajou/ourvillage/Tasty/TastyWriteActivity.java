@@ -41,7 +41,7 @@ import java.util.Date;
 public class TastyWriteActivity extends AppCompatActivity implements TastyImageInterface{
 
     private static final String TAG = "TastyWrite";
-    static String tasty_location;
+    static String tasty_location = "";
     private TextView tv_set_location;
 
     private GpsTracker gpsTracker;
@@ -70,6 +70,7 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasty_write);
 
+        tasty_location = "";
         init();
         btnMover();
     }

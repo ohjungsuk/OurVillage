@@ -236,6 +236,7 @@
             android:theme="@style/theme"
             android:textColorHint="@color/theme"
             android:background="@null"
+            android:singleLine="true"
             android:hint="추천 음식을 입력해주세요."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

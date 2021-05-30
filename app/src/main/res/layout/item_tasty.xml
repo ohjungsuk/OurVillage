@@ -134,7 +134,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@+id/tasty_label_review"
                 android:text="추천음식 : "
                 android:textSize="16sp"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_toEndOf="@+id/tasty_label_recommend"
                 android:layout_below="@+id/tasty_tv_content"
                 android:id="@+id/tasty_tv_recommend"
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"/>
 
             <Button
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="15dp"
                 android:id="@+id/tasty_btn_map"
                 android:layout_width="120dp"
                 android:layout_height="35dp"

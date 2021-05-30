@@ -55,15 +55,6 @@ public class TastyFragment extends Fragment {
             }
         });
 
-        btn_test = view.findViewById(R.id.tast_btn_test);
-        btn_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TastyShowMapActivity.class);
-                startActivity(intent);
-            }
-        });
-
         return view;
     }
 
