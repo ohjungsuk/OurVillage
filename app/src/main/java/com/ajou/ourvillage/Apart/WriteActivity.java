@@ -21,20 +21,28 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.R;
+import com.ajou.ourvillage.Tasty.TastyPostItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class WriteActivity extends AppCompatActivity implements ImageInterface {
 
     private static final String TAG = "ApartWrite";
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     private ImageButton btn_backToMain;
     private ImageButton img_upload;
@@ -105,13 +113,18 @@ public class WriteActivity extends AppCompatActivity implements ImageInterface {
     private void post(){
         final String title = et_apart_title.getText().toString();
         final String content = et_apart_content.getText().toString();
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        String name = null;
+        for (UserInfo profile : firebaseUser.getProviderData()) {
+            name = profile.getDisplayName();
+        }
+
         if (title.length() > 0 && content.length() > 0){
-            ApartPostItem apartPostItem = new ApartPostItem(mImgUri.toString(), firebaseUser.getEmail(), "2021.05.23.Sun 08:24", title, content, "5", "3", false);
+            ApartPostItem apartPostItem = new ApartPostItem(mImgUri.toString(), name, getTime(), title, content, "3", "1", false);
             uploadToDB(apartPostItem);
         }
+
     }
 
     private void uploadToDB(ApartPostItem apartPostItem){
@@ -162,6 +175,12 @@ public class WriteActivity extends AppCompatActivity implements ImageInterface {
                 uploadImage(image);
             }
         }
+    }
+
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 
     // Uri를 FireBase에 전송하고

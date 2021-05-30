@@ -3,23 +3,37 @@ package com.ajou.ourvillage.Tasty;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ajou.ourvillage.Main.MainPostAdapter;
+import com.ajou.ourvillage.Main.WriteFeedInfo;
 import com.ajou.ourvillage.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 
 public class TastyFragment extends Fragment {
@@ -29,6 +43,8 @@ public class TastyFragment extends Fragment {
     private FirebaseStorage storage;
     private FirebaseUser firebaseUser;
     private Button btn_test;
+    private String mf_nickname = null;
+    private boolean is_upload = false;
 
     public TastyFragment() {
         // Required empty public constructor
@@ -80,13 +96,36 @@ public class TastyFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        for (int i = 0; i < 10; i++) {
-            dataList.add(new TastyPostItem("dd", "이", "시간", "제", "내용", "0", "0", "주소"));
-        }
-
-        TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);
-        recyclerView.setAdapter(tastyPostAdapter);
-        recyclerView.getAdapter().notifyDataSetChanged();
+        is_upload = false;
+        db.collection("Tasty")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot doc: task.getResult()) {
+                            TastyPostItem tastyPostItem = new TastyPostItem(
+                                    doc.getString("writer"),
+                                    doc.getString("date"),
+                                    doc.getString("address"),
+                                    doc.getString("rate"),
+                                    doc.getString("review"),
+                                    doc.getString("recommend"),
+                                    doc.getString("foodImage"),
+                                    doc.getString("latitude"),
+                                    doc.getString("longitude"));
+                            dataList.add(tastyPostItem);
+                        }
+                        TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);
+                        recyclerView.setAdapter(tastyPostAdapter);
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "NO", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 }

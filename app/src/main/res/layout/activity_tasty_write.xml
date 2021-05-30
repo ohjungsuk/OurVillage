@@ -152,33 +152,95 @@
         android:background="?android:attr/listDivider"
         android:backgroundTint="@color/theme"/>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:textSize="16sp"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme"
+            android:text="평점" />
+
+        <TextView
+            android:id="@+id/tasty_tv_score"
+            android:clickable="true"
+            android:textColor="@color/theme"
+            android:textSize="16sp"
+            android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/image_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            android:text="평점을 선택해주세요." />
 
-            </LinearLayout>
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/tasty_write_et_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="top"
-                android:hint="내용"
-                android:padding="20dp"
-                android:background="@null"
-                android:textColor="@color/black"
-                android:textColorHint="@color/theme" />
-        </LinearLayout>
-    </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/theme"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:textSize="16sp"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme"
+            android:text="한줄평" />
+
+        <EditText
+            android:id="@+id/tasty_write_et_review"
+            android:gravity="top"
+            android:padding="20dp"
+            android:theme="@style/theme"
+            android:textColorHint="@color/theme"
+            android:background="@null"
+            android:singleLine="true"
+            android:hint="한줄평을 입력해주세요."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/theme"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:textSize="16sp"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme"
+            android:text="추천 음식" />
+
+        <EditText
+            android:id="@+id/tasty_write_et_recommend"
+            android:gravity="top"
+            android:padding="20dp"
+            android:theme="@style/theme"
+            android:textColorHint="@color/theme"
+            android:background="@null"
+            android:singleLine="true"
+            android:hint="추천 음식을 입력해주세요."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </LinearLayout>
