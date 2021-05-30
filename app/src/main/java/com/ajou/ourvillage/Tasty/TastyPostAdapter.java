@@ -1,9 +1,12 @@
 package com.ajou.ourvillage.Tasty;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
 
     private final ArrayList<TastyPostItem> mDataList;
     private Context mContext;
+    SharedPreferences sharedPreferences;
 
     public TastyPostAdapter(ArrayList<TastyPostItem> mDataList) {
         this.mDataList = mDataList;
@@ -44,14 +48,26 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
         holder.tv_recommend.setText(item.getRecommend());
         Glide.with(holder.itemView).load(item.getFoodImage()).into(holder.img_content);
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mContext = view.getContext();
-//
-//
-//            }
-//        });
+        holder.btn_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext = view.getContext();
+
+                sharedPreferences = mContext.getSharedPreferences("Location", Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                String latitude = mDataList.get(position).getLatitude();
+                String longitude = mDataList.get(position).getLongitude();
+                System.out.println("adapter 위도경도 " + latitude + " "+ longitude);
+                editor.putString("latitude", latitude);
+                editor.putString("longitude", longitude);
+                editor.apply();
+
+                Intent intent = new Intent(mContext, TastyShowMapActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -62,6 +78,7 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_content;
         TextView tv_writer, tv_date, tv_address, tv_rate, tv_review, tv_recommend;
+        Button btn_map;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +90,7 @@ public class TastyPostAdapter extends RecyclerView.Adapter<TastyPostAdapter.View
             tv_review = itemView.findViewById(R.id.tasty_tv_content);
             tv_recommend = itemView.findViewById(R.id.tasty_tv_recommend);
             img_content = itemView.findViewById(R.id.tasty_iv_imgcontents);
+            btn_map = itemView.findViewById(R.id.tasty_btn_map);
         }
     }
 

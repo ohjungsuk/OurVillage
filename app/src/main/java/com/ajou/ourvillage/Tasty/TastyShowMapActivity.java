@@ -27,11 +27,21 @@ public class TastyShowMapActivity extends AppCompatActivity implements OnMapRead
     private MapView mapView = null;
     private GoogleMap mMap;
     private FloatingActionButton mBackBtn;
+    private Double show_latitdue, show_longtidue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasty_show_map);
+
+        SharedPreferences sf = getSharedPreferences("Location", MODE_PRIVATE);
+        String latitude = sf.getString("latitude", "37.2814443");
+        String longitude = sf.getString("longitude", "127.0441587");
+
+        System.out.println("위도경도" + latitude + " " + longitude);
+
+        show_latitdue = Double.valueOf(latitude);
+        show_longtidue = Double.valueOf(longitude);
 
         // SupportMapFragment을 통해 레이아웃에 만든 fragment의 ID를 참조하고 구글맵을 호출한다.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -51,15 +61,17 @@ public class TastyShowMapActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.img_app);
+        BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.icon_location);
         Bitmap b=bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, 80, 80, false);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
 
-        LatLng startPoint = new LatLng(37.2814443, 127.0441587);
+        LatLng startPoint = new LatLng(show_latitdue, show_longtidue);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(startPoint));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(17)); // 확대
+
+        mMap.addMarker(markerOptions.title("").position(new LatLng(show_latitdue, show_longtidue)));
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
