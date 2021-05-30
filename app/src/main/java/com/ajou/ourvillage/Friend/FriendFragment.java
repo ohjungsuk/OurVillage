@@ -1,18 +1,27 @@
 package com.ajou.ourvillage.Friend;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ajou.ourvillage.Main.AddMyFeed;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -93,7 +102,8 @@ public class FriendFragment extends Fragment {
                                     dataList.add(new FriendListInfo(
                                             document.getData().get("my_nickname").toString(),
                                             document.getData().get("friend_nickname").toString(),
-                                            document.getData().get("address").toString()
+                                            document.getData().get("address").toString(),
+                                            document.getId().toString()
                                     ));
                                     Log.d(TAG, document.getId() + " => " + document.getData());
                                 }
@@ -108,6 +118,42 @@ public class FriendFragment extends Fragment {
                             FriendAdapter friendAdapter = new FriendAdapter(dataList);
                             recyclerView.setAdapter(friendAdapter);
                             recyclerView.getAdapter().notifyDataSetChanged();
+                            friendAdapter.setOnItemClicklistener(new OnFriendItemClickListener() {
+                                @Override
+                                public void onItemClick(FriendAdapter.ViewHolder holder, View view, int position) {
+                                    FriendListInfo pos = friendAdapter.getItem(position);
+                                    new AlertDialog.Builder(getContext())
+                                            .setMessage("팔로잉을 취소하시겠습니까?")
+                                            .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                    firebaseFirestore.collection("friends").document(pos.getId())
+                                                            .delete()
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Log.d("rrtest", pos.getId());
+                                                                    Toast.makeText(view.getContext(), "친구삭제완료", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(view.getContext(), "친구삭제 실패", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                }
+                                            })
+                                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                }
+                                            }).show();
+
+                                }
+                            });
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }

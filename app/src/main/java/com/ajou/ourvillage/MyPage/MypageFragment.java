@@ -13,22 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.Login.LoginActivity;
 import com.ajou.ourvillage.Main.MainFragment;
 import com.ajou.ourvillage.Main.MainPostAdapter;
+import com.ajou.ourvillage.Main.OnMainItemClickLIstener;
 import com.ajou.ourvillage.Main.WriteFeedInfo;
 import com.ajou.ourvillage.MainActivity;
 import com.ajou.ourvillage.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -260,7 +266,8 @@ public class MypageFragment extends Fragment {
                                             feedfile.getData().get("img_profile").toString(),
                                             feedfile.getData().get("content").toString(),
                                             feedfile.getData().get("likeCnt").toString(),
-                                            feedfile.getData().get("commentCount").toString()
+                                            feedfile.getData().get("commentCount").toString(),
+                                            feedfile.getId().toString()
                                     ));
                                 }
 
@@ -272,6 +279,51 @@ public class MypageFragment extends Fragment {
                             MainPostAdapter mainPostAdapter = new MainPostAdapter(dataList);
                             recyclerView.setAdapter(mainPostAdapter);
                             recyclerView.getAdapter().notifyDataSetChanged();
+                            mainPostAdapter.setOnItemClicklistener(new OnMainItemClickLIstener() {
+                                @Override
+                                public void onItemClick(MainPostAdapter.ViewHolder holder, View view, int position) {
+                                    WriteFeedInfo pos = mainPostAdapter.getItem(position);
+                                    Log.d("rtest",String.valueOf(pos.getId()));
+                                    //showPopup(view,pos);
+                                    PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                        @Override
+                                        public boolean onMenuItemClick(MenuItem item) {
+                                            switch (item.getItemId()){
+                                                case R.id.menu_refactor:
+
+                                                    return true;
+                                                case R.id.menu_delete:
+                                                    if(mf_nickname.equals(pos.getWriter())){
+                                                        db.collection("Feed").document(pos.getId())
+                                                                .delete()
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        Log.d("rrtest", pos.getId());
+                                                                        Toast.makeText(view.getContext(), "게시글을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        Toast.makeText(view.getContext(), "게시글 삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+                                                    }else {
+ //                                                       Toast.makeText(view.getContext(), "내 계정만 삭제할수 있습니다.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    return true;
+                                                default:
+                                                    return false;
+                                            }
+                                        }
+                                    });
+                                    MenuInflater inflater = popupMenu.getMenuInflater();
+                                    inflater.inflate(R.menu.post_menu, popupMenu.getMenu());
+                                    popupMenu.show();
+                                }
+                            });
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
