@@ -147,22 +147,33 @@ public class MainFragment extends Fragment {
                                                         MainPostAdapter mainPostAdapter = new MainPostAdapter(dataList);
                                                         recyclerView.setAdapter(mainPostAdapter);
                                                         recyclerView.getAdapter().notifyDataSetChanged();
+                                                        mainPostAdapter.setOnCommentClicklistener(new OnCommentItemClickListener() {
+                                                              @Override
+                                                              public void onCommentClick(MainPostAdapter.ViewHolder holder, View view, int position) {
+                                                                  WriteFeedInfo pos = mainPostAdapter.getItem(position);
+                                                                  Log.d("commenttest",String.valueOf(pos.getId()));
+                                                                  Intent intent = new Intent(getActivity(),WriteComment.class);
+                                                                  intent.putExtra("feed_id",pos.getId());
+                                                                  startActivity(intent);
+                                                              }
+                                                        });
+
                                                         mainPostAdapter.setOnItemClicklistener(new OnMainItemClickLIstener() {
                                                             @Override
                                                             public void onItemClick(MainPostAdapter.ViewHolder holder, View view, int position) {
                                                                 WriteFeedInfo pos = mainPostAdapter.getItem(position);
-                                                                Log.d("rtest",String.valueOf(pos.getId()));
+                                                                Log.d("rtest", String.valueOf(pos.getId()));
                                                                 //showPopup(view,pos);
                                                                 PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
                                                                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                                                     @Override
                                                                     public boolean onMenuItemClick(MenuItem item) {
-                                                                        switch (item.getItemId()){
+                                                                        switch (item.getItemId()) {
                                                                             case R.id.menu_refactor:
 
                                                                                 return true;
                                                                             case R.id.menu_delete:
-                                                                                if(mf_nickname.equals(pos.getWriter())){
+                                                                                if (mf_nickname.equals(pos.getWriter())) {
                                                                                     db.collection("Feed").document(pos.getId())
                                                                                             .delete()
                                                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -178,7 +189,7 @@ public class MainFragment extends Fragment {
                                                                                                     Toast.makeText(view.getContext(), "게시글 삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
                                                                                                 }
                                                                                             });
-                                                                                }else {
+                                                                                } else {
                                                                                     Toast.makeText(view.getContext(), "내 계정만 삭제할수 있습니다.", Toast.LENGTH_SHORT).show();
                                                                                 }
                                                                                 return true;
@@ -191,6 +202,7 @@ public class MainFragment extends Fragment {
                                                                 inflater.inflate(R.menu.post_menu, popupMenu.getMenu());
                                                                 popupMenu.show();
                                                             }
+
                                                         });
                                                     }
                                                 }
