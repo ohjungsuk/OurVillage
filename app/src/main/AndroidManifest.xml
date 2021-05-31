@@ -24,6 +24,10 @@
             android:theme="@style/Theme.Design.NoActionBar">
         </activity>
         <activity
+            android:name=".Tasty.TastyAllMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
             android:name=".Tasty.TastyChooseMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
