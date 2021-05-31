@@ -38,12 +38,14 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class TastyFragment extends Fragment {
 
-    private TextView btn_write;
+    private TextView btn_write, btn_showmap;
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private FirebaseUser firebaseUser;
     private String mf_nickname = null;
     private boolean is_upload = false;
+    static ArrayList<Double> locationX = new ArrayList<>();
+    static ArrayList<Double> locationY = new ArrayList<>();
 
     public TastyFragment() {
         // Required empty public constructor
@@ -66,6 +68,15 @@ public class TastyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TastyWriteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_showmap = view.findViewById(R.id.tasty_btn_see_map);
+        btn_showmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TastyAllMapActivity.class);
                 startActivity(intent);
             }
         });
@@ -104,10 +115,16 @@ public class TastyFragment extends Fragment {
                                     doc.getString("latitude"),
                                     doc.getString("longitude"));
                             dataList.add(tastyPostItem);
+
+                            locationX.add(Double.valueOf(tastyPostItem.getLatitude()));
+                            locationY.add(Double.valueOf(tastyPostItem.getLongitude()));
+                            System.out.println("testtt" + tastyPostItem.getLatitude());
+
                         }
                         TastyPostAdapter tastyPostAdapter = new TastyPostAdapter(dataList);
                         recyclerView.setAdapter(tastyPostAdapter);
                         recyclerView.getAdapter().notifyDataSetChanged();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

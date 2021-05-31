@@ -61,8 +61,7 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
             tv_title = itemView.findViewById(R.id.post_tv_title);
             tv_content = itemView.findViewById(R.id.post_tv_content);
             tv_date = itemView.findViewById(R.id.post_tv_date);
-            tv_likecnt = itemView.findViewById(R.id.post_tv_like_count);
-            tv_commentcnt = itemView.findViewById(R.id.post_tv_commentcount);
+
         }
     }
 }

@@ -30,6 +30,20 @@
                 tools:text="맛집 탐색" />
 
             <TextView
+                android:id="@+id/tasty_btn_see_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@+id/tasty_btn_write"
+                android:layout_centerVertical="true"
+                android:background="#00FFFFFF"
+                android:textColor="@color/ourvillage_main"
+                android:textSize="20sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="모아보기" />
+
+            <TextView
                 android:id="@+id/tasty_btn_write"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

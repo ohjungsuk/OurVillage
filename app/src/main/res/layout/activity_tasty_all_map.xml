@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Tasty.TastyAllMapActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tasty_all_btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="550dp"
+        android:src="@drawable/icon_back_white"
+        app:backgroundTint="@color/theme"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|end" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tasty_all_map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
