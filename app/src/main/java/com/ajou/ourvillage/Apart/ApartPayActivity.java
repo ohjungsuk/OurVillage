@@ -80,7 +80,7 @@ public class ApartPayActivity extends AppCompatActivity {
                 .setBootExtra(bootExtra)
                 .setUX(UX.PG_DIALOG)
 //                .setUserPhone("010-1234-5678") // 구매자 전화번호
-                .setName("포인트 충전") // 결제할 상품명
+                .setName("아파트 관리비") // 결제할 상품명
                 .setOrderId("1234") // 결제 고유번호expire_month
                 .setPrice(payPoint) // 결제할 금액
                 .addItem("마우's 스", 1, "ITEM_CODE_MOUSE", 100) // 주문정보에 담길 상품정보, 통계를 위해 사용
