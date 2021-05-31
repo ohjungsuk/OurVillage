@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
-public class ShowAllUsers extends AppCompatActivity {
+public class ShowAllUsersActivity extends AppCompatActivity {
     private ArrayList<FriendListInfo> friendlist;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseUser firebaseUser;
@@ -79,7 +79,7 @@ public class ShowAllUsers extends AppCompatActivity {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
                             RecyclerView recyclerView = (RecyclerView)findViewById(R.id.allusers_recyclerview);
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ShowAllUsers.this);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ShowAllUsersActivity.this);
                             recyclerView.setLayoutManager(layoutManager);
 
                             AllUsersAdapter allUsersAdapter = new AllUsersAdapter(dataList);
@@ -91,7 +91,7 @@ public class ShowAllUsers extends AppCompatActivity {
                                     FriendListInfo item = allUsersAdapter.getItem(position);
                                     Log.d("test2", String.valueOf(item));
                                     //Toast.makeText(getApplicationContext(),"아이템 선택 " + item.getNickname() + item.getAddress(), Toast.LENGTH_LONG).show();
-                                    new AlertDialog.Builder(ShowAllUsers.this)
+                                    new AlertDialog.Builder(ShowAllUsersActivity.this)
                                             .setMessage(item.getMy_nickname()+ "를(을) 친구추가 할까요?")
                                             .setPositiveButton("네", new DialogInterface.OnClickListener() {
                                                 @Override
