@@ -55,7 +55,7 @@ public class AddMyFeed extends AppCompatActivity implements ImageInterface {
 
     long mNow;
     Date mDate;
-    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private LinearLayout image_layout;
     private ImageView imageView;
     private ImageButton btn_backToMain,imgbtn_upload;

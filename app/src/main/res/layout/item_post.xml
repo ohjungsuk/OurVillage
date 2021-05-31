@@ -107,53 +107,8 @@
                 android:layout_below="@id/post_tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/post_tv_like_lb"
-                android:layout_marginVertical="5dp"
-                android:layout_below="@+id/post_iv_imgcontents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:text="좋아요" />
-
-            <TextView
-                android:id="@+id/post_tv_like_count"
-                android:layout_marginHorizontal="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/post_tv_like_lb"
-                android:layout_alignBottom="@+id/post_tv_like_lb"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:text="5" />
 
 
-            <TextView
-                android:id="@+id/post_tv_comment"
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/post_tv_like_count"
-                android:layout_alignBottom="@+id/post_tv_like_lb"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:text="댓글" />
-
-            <TextView
-                android:id="@+id/post_tv_commentcount"
-                android:layout_marginHorizontal="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/post_tv_comment"
-                android:layout_alignBottom="@+id/post_tv_comment"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:text="5" />
         </RelativeLayout>
 
         <View
@@ -171,11 +126,10 @@
                 android:id="@+id/post_btn_like"
                 android:paddingVertical="15dp"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
                 android:orientation="horizontal" >
 
                 <ImageView
@@ -184,40 +138,32 @@
                     android:layout_height="18dp"
                     android:src="@drawable/ic_like_normal" />
 
-                <TextView
-                    android:id="@+id/post_tv_like"
-                    android:layout_marginStart="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:text="좋아요" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/post_btn_comment"
-                android:paddingVertical="15dp"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="horizontal" >
-
                 <ImageView
+                    android:id="@+id/post_img_comment"
+                    android:layout_marginStart="3dp"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_comment" />
-                <TextView
-                    android:layout_marginStart="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:text="댓글쓰기" />
+
             </LinearLayout>
+
+
+            <Button
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/white"
+                android:id="@+id/post_tv_write_comment"
+                android:layout_marginStart="5dp"
+                android:clickable="true"
+                android:paddingVertical="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="2dp"
+                android:stateListAnimator="@null"
+                android:text="좋아요/댓글쓰기" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
