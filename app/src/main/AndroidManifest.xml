@@ -35,7 +35,10 @@
             android:name=".Tasty.TastyShowMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.NoActionBar" />
-        <activity android:name=".Friend.ShowAllUsers" />
+        <activity
+            android:name=".Friend.ShowAllUsersActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar"/>
         <activity
             android:name=".Tasty.TastyWriteActivity"
             android:screenOrientation="portrait"

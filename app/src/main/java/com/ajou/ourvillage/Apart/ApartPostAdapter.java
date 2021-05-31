@@ -40,8 +40,6 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
         holder.tv_title.setText(item.getTitle());
         holder.tv_content.setText(item.getContent());
         holder.tv_date.setText(item.getDate());
-        holder.tv_likecnt.setText(item.getLikeCnt());
-        holder.tv_commentcnt.setText(item.getCommentCount());
     }
 
     @Override
