@@ -28,7 +28,9 @@ import android.widget.Toast;
 import com.ajou.ourvillage.Login.LoginActivity;
 import com.ajou.ourvillage.Main.MainFragment;
 import com.ajou.ourvillage.Main.MainPostAdapter;
+import com.ajou.ourvillage.Main.OnCommentItemClickListener;
 import com.ajou.ourvillage.Main.OnMainItemClickLIstener;
+import com.ajou.ourvillage.Main.WriteComment;
 import com.ajou.ourvillage.Main.WriteFeedInfo;
 import com.ajou.ourvillage.MainActivity;
 import com.ajou.ourvillage.R;
@@ -279,6 +281,16 @@ public class MypageFragment extends Fragment {
                             MainPostAdapter mainPostAdapter = new MainPostAdapter(dataList);
                             recyclerView.setAdapter(mainPostAdapter);
                             recyclerView.getAdapter().notifyDataSetChanged();
+                            mainPostAdapter.setOnCommentClicklistener(new OnCommentItemClickListener() {
+                                @Override
+                                public void onCommentClick(MainPostAdapter.ViewHolder holder, View view, int position) {
+                                    WriteFeedInfo pos = mainPostAdapter.getItem(position);
+                                    Log.d("commenttest",String.valueOf(pos.getId()));
+                                    Intent intent = new Intent(getActivity(), WriteComment.class);
+                                    intent.putExtra("feed_id",pos.getId());
+                                    startActivity(intent);
+                                }
+                            });
                             mainPostAdapter.setOnItemClicklistener(new OnMainItemClickLIstener() {
                                 @Override
                                 public void onItemClick(MainPostAdapter.ViewHolder holder, View view, int position) {
