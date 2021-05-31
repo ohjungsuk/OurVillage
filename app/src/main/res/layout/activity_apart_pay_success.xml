@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".Apart.ApartPaySuccessActivity">
+
+    <ImageView
+        android:id="@+id/apart_money_img"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:src="@drawable/temp" />
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:id="@+id/point_img_login"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="관리비 확인"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/apart_money_img"
+        android:textColor="@color/theme" />
+
+    <FrameLayout
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/point_img_login"
+        android:background="@drawable/button2" >
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_marginVertical="20dp"
+                android:id="@+id/apart_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="납부가 완료되었습니다." />
+
+            <Button
+                android:id="@+id/apart_btn_complete_pay"
+                android:background="@drawable/rounding_btn"
+                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="확인" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</RelativeLayout>

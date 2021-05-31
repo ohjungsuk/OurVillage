@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.ajou.ourvillage"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -66,4 +66,7 @@ dependencies {
     // google map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    // 결제모듈
+    implementation 'com.github.bootpay:client_android_java:3.3.63'
 }

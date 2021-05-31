@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,9 @@ public class ApartFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private FirebaseUser firebaseUser;
+    private Button btn_money;
+    static int checkNum = 1;
+    static int payPoint, afterPoint;
 
     public ApartFragment() {
         // Required empty public constructor
@@ -60,6 +64,14 @@ public class ApartFragment extends Fragment {
             }
         });
 
+        btn_money = view.findViewById(R.id.apart_btn_check);
+        btn_money.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ApartCheckMoneyActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

@@ -27,8 +27,7 @@
                 android:textSize="24sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/black"
-                android:text="아파트 이름"
-                tools:text="아파트 이름" />
+                android:text="자이 2차" />
 
             <TextView
                 android:id="@+id/apart_btn_write"
@@ -45,7 +44,26 @@
 
         </RelativeLayout>
 
+        <ImageView
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/img_aprt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <Button
+            android:id="@+id/apart_btn_check"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/rounding_btn"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="이번 달 관리비 확인하러 가기"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
 
         <View
             android:layout_marginHorizontal="15dp"
