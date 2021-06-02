@@ -59,31 +59,17 @@ public class FriendFragment extends Fragment {
 
         firebaseFirestore=FirebaseFirestore.getInstance();
 
-//        Bundle bundle = getArguments();
-//
-//        String first = bundle.getString("nname");
-//        String second = bundle.getString("addre");
-//        Toast.makeText(getActivity(),"친구추가완료? " + first + second, Toast.LENGTH_LONG).show();
-
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
+        reload();
+    }
+    public void reload(){
         ArrayList<FriendListInfo> dataList = new ArrayList<>();
 
-
-//        RecyclerView recyclerView = getActivity().findViewById(R.id.friend_recyclerview);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        //dataList.add(new FriendListItem(first,address));
-//
-//        FriendAdapter friendAdapter = new FriendAdapter(dataList);
-//        recyclerView.setAdapter(friendAdapter);
-//        recyclerView.getAdapter().notifyDataSetChanged();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -127,7 +113,7 @@ public class FriendFragment extends Fragment {
                                             .setPositiveButton("네", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                                    dialogInterface.dismiss();
+
                                                     firebaseFirestore.collection("friends").document(pos.getId())
                                                             .delete()
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -143,6 +129,8 @@ public class FriendFragment extends Fragment {
                                                                     Toast.makeText(view.getContext(), "친구삭제 실패", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
+                                                    dialogInterface.dismiss();
+                                                    reload();
                                                 }
                                             })
                                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {

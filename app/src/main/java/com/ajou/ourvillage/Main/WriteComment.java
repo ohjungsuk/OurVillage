@@ -116,6 +116,9 @@ public class WriteComment extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        reload();
+    }
+    private void reload(){
         ArrayList<WriteCommentInfo> dataList = new ArrayList<>();
 
         Intent intent = getIntent();
@@ -132,11 +135,11 @@ public class WriteComment extends AppCompatActivity {
                             for(QueryDocumentSnapshot commentfile : task.getResult()){
                                 if(commentfile.getData().get("feed_id").toString().equals(feed_id)){
                                     dataList.add(new WriteCommentInfo(
-                                        commentfile.getData().get("feed_id").toString(),
-                                        commentfile.getData().get("writer").toString(),
-                                        commentfile.getData().get("comment").toString(),
-                                        commentfile.getData().get("date").toString(),
-                                        commentfile.getId()
+                                            commentfile.getData().get("feed_id").toString(),
+                                            commentfile.getData().get("writer").toString(),
+                                            commentfile.getData().get("comment").toString(),
+                                            commentfile.getData().get("date").toString(),
+                                            commentfile.getId()
                                     ));
                                 }
                             }
@@ -162,6 +165,7 @@ public class WriteComment extends AppCompatActivity {
                                                     public void onSuccess(Void aVoid) {
                                                         Log.d("rrtest", pos.getComment_uid());
                                                         Toast.makeText(view.getContext(), "댓글을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                                                        reload();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {

@@ -220,8 +220,6 @@ public class MypageFragment extends Fragment {
                         }).show();
             }
         });
-
-
         return view;
     }
 
@@ -238,32 +236,22 @@ public class MypageFragment extends Fragment {
                         }
                     }
                 });
-//        if (emailEdit.length() > 0) {
-//            firebaseAuth.sendPasswordResetEmail(emailEdit)
-//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                Toast.makeText(getContext(), "이메일을 보냈습니다.", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//        } else {
-//            Toast.makeText(getContext(), "이메일을 입력해주세요", Toast.LENGTH_SHORT).show();
-//        }
-//
+
     }
     @Override
     public void onResume() {
         super.onResume();
+        reload();
+    }
 
+    private void reload(){
         ArrayList<WriteFeedInfo> dataList = new ArrayList<>();
 
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference collectionReference = db.collection("Feed");
         collectionReference.orderBy("date", Query.Direction.DESCENDING)
-        //db.collection("Feed")
+                //db.collection("Feed")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -317,23 +305,38 @@ public class MypageFragment extends Fragment {
                                             switch (item.getItemId()){
                                                 case R.id.menu_delete:
                                                     if(mf_nickname.equals(pos.getWriter())){
-                                                        db.collection("Feed").document(pos.getId())
-                                                                .delete()
-                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        new AlertDialog.Builder(getContext())
+                                                                .setMessage("정말 삭제하시겠습니까?")
+                                                                .setPositiveButton("네", new DialogInterface.OnClickListener() {
                                                                     @Override
-                                                                    public void onSuccess(Void aVoid) {
-                                                                        Log.d("rrtest", pos.getId());
-                                                                        Toast.makeText(view.getContext(), "게시글을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                                        db.collection("Feed").document(pos.getId())
+                                                                                .delete()
+                                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onSuccess(Void aVoid) {
+                                                                                        Log.d("rrtest", pos.getId());
+                                                                                        Toast.makeText(view.getContext(), "게시글을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                })
+                                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                                    @Override
+                                                                                    public void onFailure(@NonNull Exception e) {
+                                                                                        Toast.makeText(view.getContext(), "게시글 삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                });
+                                                                        dialogInterface.dismiss();
+                                                                        reload();
                                                                     }
                                                                 })
-                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                                                                     @Override
-                                                                    public void onFailure(@NonNull Exception e) {
-                                                                        Toast.makeText(view.getContext(), "게시글 삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                                        dialogInterface.dismiss();
                                                                     }
-                                                                });
+                                                                }).show();
                                                     }else {
- //                                                       Toast.makeText(view.getContext(), "내 계정만 삭제할수 있습니다.", Toast.LENGTH_SHORT).show();
+                                                        //                                                       Toast.makeText(view.getContext(), "내 계정만 삭제할수 있습니다.", Toast.LENGTH_SHORT).show();
                                                     }
                                                     return true;
                                                 default:
@@ -352,5 +355,4 @@ public class MypageFragment extends Fragment {
                     }
                 });
     }
-
 }

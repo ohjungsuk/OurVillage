@@ -103,11 +103,10 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
             <ImageView
                 android:id="@+id/post_iv_imgcontents"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:layout_below="@id/post_tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
 
         </RelativeLayout>
 

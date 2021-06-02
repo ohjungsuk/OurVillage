@@ -1,9 +1,11 @@
 package com.ajou.ourvillage.Main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,7 +85,11 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        reloadFeed();
 
+    }
+
+    private void reloadFeed(){
         ArrayList<WriteFeedInfo> dataList = new ArrayList<>();
         is_upload = false;
 
@@ -104,7 +110,7 @@ public class MainFragment extends Fragment {
                                     Log.d("test", mf_nickname);
                                     CollectionReference collectionReference = db.collection("Feed");
                                     collectionReference.orderBy("date", Query.Direction.DESCENDING)
-                                    //db.collection("Feed")
+                                            //db.collection("Feed")
                                             .get()
                                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                 @Override
@@ -121,7 +127,7 @@ public class MainFragment extends Fragment {
                                                                         feedfile.getData().get("likeCnt").toString(),
                                                                         feedfile.getData().get("commentCount").toString(),
                                                                         feedfile.getId().toString()
-                                                                        ));
+                                                                ));
                                                             }
                                                             if(mf_nickname.equals(feedfile.getData().get("writer").toString())){
                                                                 if(!is_upload){
@@ -148,14 +154,14 @@ public class MainFragment extends Fragment {
                                                         recyclerView.setAdapter(mainPostAdapter);
                                                         recyclerView.getAdapter().notifyDataSetChanged();
                                                         mainPostAdapter.setOnCommentClicklistener(new OnCommentItemClickListener() {
-                                                              @Override
-                                                              public void onCommentClick(MainPostAdapter.ViewHolder holder, View view, int position) {
-                                                                  WriteFeedInfo pos = mainPostAdapter.getItem(position);
-                                                                  Log.d("commenttest",String.valueOf(pos.getId()));
-                                                                  Intent intent = new Intent(getActivity(),WriteComment.class);
-                                                                  intent.putExtra("feed_id",pos.getId());
-                                                                  startActivity(intent);
-                                                              }
+                                                            @Override
+                                                            public void onCommentClick(MainPostAdapter.ViewHolder holder, View view, int position) {
+                                                                WriteFeedInfo pos = mainPostAdapter.getItem(position);
+                                                                Log.d("commenttest",String.valueOf(pos.getId()));
+                                                                Intent intent = new Intent(getActivity(),WriteComment.class);
+                                                                intent.putExtra("feed_id",pos.getId());
+                                                                startActivity(intent);
+                                                            }
                                                         });
 
                                                         mainPostAdapter.setOnItemClicklistener(new OnMainItemClickLIstener() {
@@ -171,21 +177,37 @@ public class MainFragment extends Fragment {
                                                                         switch (item.getItemId()) {
                                                                             case R.id.menu_delete:
                                                                                 if (mf_nickname.equals(pos.getWriter())) {
-                                                                                    db.collection("Feed").document(pos.getId())
-                                                                                            .delete()
-                                                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                    new AlertDialog.Builder(getContext())
+                                                                                            .setMessage("정말 삭제하시겠습니까?")
+                                                                                            .setPositiveButton("네", new DialogInterface.OnClickListener() {
                                                                                                 @Override
-                                                                                                public void onSuccess(Void aVoid) {
-                                                                                                    Log.d("rrtest", pos.getId());
-                                                                                                    Toast.makeText(view.getContext(), "게시글을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                                                    db.collection("Feed").document(pos.getId())
+                                                                                                            .delete()
+                                                                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                                                @Override
+                                                                                                                public void onSuccess(Void aVoid) {
+                                                                                                                    Log.d("rrtest", pos.getId());
+                                                                                                                    Toast.makeText(view.getContext(), "게시글을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                                                                }
+                                                                                                            })
+                                                                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                                                                @Override
+                                                                                                                public void onFailure(@NonNull Exception e) {
+                                                                                                                    Toast.makeText(view.getContext(), "게시글 삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                                                                }
+                                                                                                            });
+                                                                                                    dialogInterface.dismiss();
+                                                                                                    reloadFeed();
                                                                                                 }
                                                                                             })
-                                                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                                                                                                 @Override
-                                                                                                public void onFailure(@NonNull Exception e) {
-                                                                                                    Toast.makeText(view.getContext(), "게시글 삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                                                    dialogInterface.dismiss();
                                                                                                 }
-                                                                                            });
+                                                                                            }).show();
+
                                                                                 } else {
                                                                                     Toast.makeText(view.getContext(), "내 계정만 삭제할수 있습니다.", Toast.LENGTH_SHORT).show();
                                                                                 }
