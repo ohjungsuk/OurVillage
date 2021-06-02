@@ -193,7 +193,7 @@ public class WriteActivity extends AppCompatActivity implements ImageInterface {
     @Override
     public void uploadFireBaseSuccess(Uri uri) {
         mImgUri = uri;
-        Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
     }
 
 

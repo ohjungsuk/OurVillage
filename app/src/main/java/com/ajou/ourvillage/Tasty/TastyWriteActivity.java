@@ -248,7 +248,7 @@ public class TastyWriteActivity extends AppCompatActivity implements TastyImageI
     @Override
     public void uploadFireBaseSuccess(Uri uri) {
         mImgUri = uri;
-        Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
     }
 
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/borderline"
     android:layout_gravity="center"
-    android:layout_width="400dp"
-    android:layout_height="600dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Main.WriteComment">
     <LinearLayout

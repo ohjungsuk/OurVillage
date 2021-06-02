@@ -75,7 +75,7 @@ public class TastyChooseMapActivity extends AppCompatActivity {
 
                 address_latitude = String.valueOf(latitude);
                 address_longtitude = String.valueOf(longitude);
-                Toast.makeText(TastyChooseMapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+                //Toast.makeText(TastyChooseMapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
         });
 

@@ -174,7 +174,7 @@ public class CommunityWriteActivity extends AppCompatActivity implements Communi
     @Override
     public void uploadFireBaseSuccess(Uri uri) {
         mImgUri = uri;
-        Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "firebase uri : " + mImgUri, Toast.LENGTH_SHORT).show();
     }
 
 
