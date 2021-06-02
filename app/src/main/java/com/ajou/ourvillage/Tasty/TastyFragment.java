@@ -25,8 +25,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -98,7 +100,9 @@ public class TastyFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         is_upload = false;
-        db.collection("Tasty")
+        CollectionReference collectionReference = db.collection("Tasty");
+        collectionReference.orderBy("date", Query.Direction.DESCENDING)
+        //db.collection("Tasty")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

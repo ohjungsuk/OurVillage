@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ajou.ourvillage.Login.LoginActivity;
+import com.ajou.ourvillage.Main.AddMyFeed;
 import com.ajou.ourvillage.Main.MainFragment;
 import com.ajou.ourvillage.Main.MainPostAdapter;
 import com.ajou.ourvillage.Main.OnCommentItemClickListener;
@@ -42,7 +43,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -69,7 +72,7 @@ public class MypageFragment extends Fragment {
     private void init(View v){
         mypage_Nickname = (TextView)v.findViewById(R.id.mypage_Nickname);
         mypage_email = (TextView)v.findViewById(R.id.mypage_email);
-
+        mypage_add_post = (Button)v.findViewById(R.id.mypage_add_post);
         mypage_EmailAuth = (Button)v.findViewById(R.id.mypage_EmailAuth);
         mypage_linear_modify = (LinearLayout) v.findViewById(R.id.mypage_linear_modify);
         mypage_modify_pw = (Button) v.findViewById(R.id.mypage_modify_pw);
@@ -131,6 +134,14 @@ public class MypageFragment extends Fragment {
                     mypage_linear_modify.setVisibility(v.VISIBLE);
                 }
 
+            }
+        });
+
+        mypage_add_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddMyFeed.class);
+                startActivity(intent);
             }
         });
 
@@ -250,7 +261,9 @@ public class MypageFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("Feed")
+        CollectionReference collectionReference = db.collection("Feed");
+        collectionReference.orderBy("date", Query.Direction.DESCENDING)
+        //db.collection("Feed")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -89,8 +89,8 @@
                 android:gravity="center"
                 android:background="@drawable/rounding_btn"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:text="게시물 추가"
                 android:textColor="@color/white"
@@ -101,62 +101,52 @@
                 android:layout_width="120dp"
                 android:layout_height="35dp"
                 android:background="@drawable/rounding_btn"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="회원정보 수정"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:padding="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
             <Button
-                android:id="@+id/mypage_myAddress"
+                android:id="@+id/mypage_btn_logout"
                 android:layout_width="120dp"
                 android:layout_height="35dp"
                 android:gravity="center"
                 android:background="@drawable/rounding_btn"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="내 지역 설정"
+                android:text="로그아웃"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:padding="10dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@android:color/white"
-            android:layout_marginVertical="10dp"
-            android:layout_margin="20dp"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/mypage_btn_logout"
-                android:layout_marginEnd="25dp"
-                android:padding="11dp"
-                android:background="@drawable/rounding_btn"
-                android:layout_width="150dp"
-                android:layout_weight="1"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                android:text="로그아웃"
-                android:layout_height="wrap_content"/>
-
             <Button
                 android:id="@+id/mypage_btn_signout"
-                android:layout_marginStart="25dp"
-                android:padding="11dp"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
                 android:background="@drawable/rounding_btn"
-                android:layout_width="150dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:text="회원탈퇴"
-                android:textSize="13sp"
                 android:textColor="@color/white"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:textSize="12sp"
+                android:padding="10dp"/>
+            mypage_btn_logout mypage_btn_signout
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/mypage_linear_modify"

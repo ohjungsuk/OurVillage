@@ -39,6 +39,7 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
         holder.tv_writer.setText(item.getWriter());
         holder.tv_title.setText(item.getTitle());
         holder.tv_content.setText(item.getContent());
+        Glide.with(holder.itemView).load(item.getImg_profile()).into(holder.img_content);
         holder.tv_date.setText(item.getDate());
     }
 
@@ -48,7 +49,7 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_profile;
+        ImageView img_profile,img_content;
         TextView tv_writer, tv_title, tv_content, tv_date, tv_likecnt, tv_commentcnt;
 
         public ViewHolder(@NonNull View itemView) {
@@ -58,6 +59,7 @@ public class ApartPostAdapter extends RecyclerView.Adapter<ApartPostAdapter.View
             tv_writer = itemView.findViewById(R.id.post_tv_writer);
             tv_title = itemView.findViewById(R.id.post_tv_title);
             tv_content = itemView.findViewById(R.id.post_tv_content);
+            img_content = itemView.findViewById(R.id.post_iv_imgcontents);
             tv_date = itemView.findViewById(R.id.post_tv_date);
 
         }
