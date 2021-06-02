@@ -139,8 +139,8 @@
         <ImageView
             android:id="@+id/tasty_write_btn_img"
             android:background="@drawable/image"
-            android:layout_width="150dp"
-            android:layout_height="135dp"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
             android:layout_marginVertical="15dp"
             android:scaleType="center"
             android:clickable="true"/>
