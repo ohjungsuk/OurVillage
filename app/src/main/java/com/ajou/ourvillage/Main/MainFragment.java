@@ -169,9 +169,6 @@ public class MainFragment extends Fragment {
                                                                     @Override
                                                                     public boolean onMenuItemClick(MenuItem item) {
                                                                         switch (item.getItemId()) {
-                                                                            case R.id.menu_refactor:
-
-                                                                                return true;
                                                                             case R.id.menu_delete:
                                                                                 if (mf_nickname.equals(pos.getWriter())) {
                                                                                     db.collection("Feed").document(pos.getId())
